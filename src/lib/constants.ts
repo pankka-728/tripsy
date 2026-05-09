@@ -144,7 +144,10 @@ export const BOOK_OPTIONS: BookOption[] = [
   }
 ];
 
-export const PREFERENCES = [
+const PREFERENCE_VALUES = ['relax', 'culture', 'food', 'beach', 'adventure', 'luxury'] as const;
+type PreferenceValue = typeof PREFERENCE_VALUES[number];
+
+export const PREFERENCES: { value: PreferenceValue; label: string; icon: string }[] = [
   { value: "relax", label: "轻松休闲", icon: "🌴" },
   { value: "culture", label: "深度人文", icon: "🏛️" },
   { value: "food", label: "美食打卡", icon: "🍜" },

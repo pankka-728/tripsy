@@ -82,10 +82,10 @@ export default function PlanPage() {
     setLoading(false);
   };
 
-  const togglePreference = (value: string) => {
+  const togglePreference = (value: 'relax' | 'culture' | 'food' | 'beach' | 'adventure' | 'luxury') => {
     const currentPrefs = formData.preferences || [];
     const newPrefs = currentPrefs.includes(value)
-      ? currentPrefs.filter(p => p !== value)
+      ? currentPrefs.filter((p: string) => p !== value)
       : [...currentPrefs, value];
     setFormData({ ...formData, preferences: newPrefs });
   };
@@ -172,7 +172,7 @@ export default function PlanPage() {
                   <Label className="text-base font-medium">交通方式</Label>
                   <RadioGroup 
                     value={formData.transportationType} 
-                    onValueChange={(value: string) => setFormData({ ...formData, transportationType: value })}
+                    onValueChange={(value: 'flight' | 'train' | 'self-drive' | 'bus' | 'mixed') => setFormData({ ...formData, transportationType: value })}
                     className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4"
                   >
                     {TRANSPORTATION_TYPES.map((type) => (
@@ -195,7 +195,7 @@ export default function PlanPage() {
                   <Label className="text-base font-medium">出行性质</Label>
                   <RadioGroup 
                     value={formData.travelType} 
-                    onValueChange={(value: string) => setFormData({ ...formData, travelType: value })}
+                    onValueChange={(value: 'family' | 'colleague' | 'friends' | 'honeymoon' | 'couple' | 'solo') => setFormData({ ...formData, travelType: value })}
                     className="grid grid-cols-2 md:grid-cols-3 gap-4"
                   >
                     {TRAVEL_TYPES.map((type) => (
@@ -325,7 +325,7 @@ export default function PlanPage() {
                       <Label>货币类型</Label>
                       <RadioGroup 
                         value={formData.budget?.currency} 
-                        onValueChange={(value: string) => setFormData({
+                        onValueChange={(value: 'CNY' | 'USD') => setFormData({
                           ...formData,
                           budget: { ...formData.budget!, currency: value }
                         })}

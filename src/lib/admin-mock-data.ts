@@ -554,7 +554,7 @@ const generateDestinations = (): DestinationAdmin[] => {
   ];
   
   let idCounter = 1;
-  allDestinations.forEach((dest: DestinationAdmin, index: number) => {
+  allDestinations.forEach((dest, index) => {
     // 优先使用专门配置的当地风景图片，如果没有则使用智能分配的通用图片
     let imageUrl: string;
     
@@ -620,8 +620,8 @@ const generateDestinations = (): DestinationAdmin[] => {
       ],
       bestSeason: dest.bestSeason,
       suggestedDays: dest.suggestedDays,
-      isPopular: dest.isPopular || false,
-      sortOrder: dest.isPopular ? 1 : 100 + index,
+      isPopular: Boolean((dest as Record<string, unknown>).isPopular),
+      sortOrder: (dest as Record<string, unknown>).isPopular ? 1 : 100 + index,
       tags: dest.tags,
       status: 'active',
       createdAt: new Date('2024-01-01'),
