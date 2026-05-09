@@ -492,9 +492,23 @@ const generateDestinations = (): DestinationAdmin[] => {
     ...africaDestinations,
   ];
   
-  // 为每个目的地添加完整属性
+  // 为每个目的地添加完整属性和可靠的图片
+  const imageUrls = [
+    'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop', // 城市风景
+    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop', // 山脉
+    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop', // 海滩
+    'https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=800&h=600&fit=crop', // 古建筑
+    'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&h=600&fit=crop', // 湖泊
+    'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&h=600&fit=crop', // 夜景
+    'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800&h=600&fit=crop', // 森林
+    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=600&fit=crop', // 雪山
+    'https://images.unsplash.com/photo-1501785888041-af3ef281b399?w=800&h=600&fit=crop', // 城市天际线
+    'https://images.unsplash.com/photo-1504598318550-17eba1008a68?w=800&h=600&fit=crop', // 日落
+  ];
+  
   let idCounter = 1;
   allDestinations.forEach((dest: any, index: number) => {
+    const imageIndex = index % imageUrls.length;
     const fullDest: DestinationAdmin = {
       id: `dest-${idCounter++}`,
       name: dest.name,
@@ -504,10 +518,10 @@ const generateDestinations = (): DestinationAdmin[] => {
       region: dest.region || '',
       description: `${dest.name}是${dest.country}的著名旅游城市，以${dest.tags.join('、')}闻名。这里有独特的文化魅力和美丽的风景，是旅行者的理想目的地。`,
       shortDescription: `${dest.country}${dest.name}旅游`,
-      imageUrl: `https://images.unsplash.com/photo-${1500000000000 + index * 1000}?w=800`,
+      imageUrl: imageUrls[imageIndex],
       gallery: [
-        `https://images.unsplash.com/photo-${1500000000000 + index * 1000}?w=800`,
-        `https://images.unsplash.com/photo-${1500000000001 + index * 1000}?w=800`,
+        imageUrls[imageIndex],
+        imageUrls[(imageIndex + 1) % imageUrls.length],
       ],
       bestSeason: dest.bestSeason,
       suggestedDays: dest.suggestedDays,
