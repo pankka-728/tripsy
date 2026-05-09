@@ -492,7 +492,7 @@ const generateDestinations = (): DestinationAdmin[] => {
     ...africaDestinations,
   ];
   
-  // 重要城市专属当地风景图片（精选重要城市，确保不重复）
+  // 重要城市专属当地风景图片（精选重要城市，确保每个都有真正不同的图片）
   const specialCityImages: Record<string, string> = {
     // 中国核心城市（精选最重要的，每个都有真正不同的图片）
     '北京': 'https://images.unsplash.com/photo-1508804185872-d0def16c5c67?w=800&h=600&fit=crop', // 北京故宫/天安门
@@ -507,59 +507,16 @@ const generateDestinations = (): DestinationAdmin[] => {
     '苏州': 'https://images.unsplash.com/photo-1534329539061-64caeb388c42?w=800&h=600&fit=crop', // 苏州园林
     '南京': 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&h=600&fit=crop', // 南京夫子庙
     '重庆': 'https://images.unsplash.com/photo-1586816879360-004f5b0c51e5?w=800&h=600&fit=crop', // 重庆夜景
-    '广州': 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=800&h=600&fit=crop', // 广州塔
-    '深圳': 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=800&h=600&fit=crop', // 深圳天际线
-    '青岛': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop', // 青岛海景
-    '大连': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop', // 大连海滨
+    '广州': 'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=800&h=600&fit=crop', // 广州塔
+    '深圳': 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&h=600&fit=crop', // 深圳天际线
+    '青岛': 'https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=800&h=600&fit=crop', // 青岛海景
+    '大连': 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&h=600&fit=crop', // 大连海滨
     '天津': 'https://images.unsplash.com/photo-1513407030348-c983a97b98d8?w=800&h=600&fit=crop', // 天津风光
     '武汉': 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&h=600&fit=crop', // 武汉黄鹤楼
-    '长沙': 'https://images.unsplash.com/photo-1513407030348-c983a97b98d8?w=800&h=600&fit=crop', // 长沙橘子洲
-    '昆明': 'https://images.unsplash.com/photo-1537531383496-f4749b8032cf?w=800&h=600&fit=crop', // 昆明春城
-    '大理': 'https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&h=600&fit=crop', // 大理古城
+    '长沙': 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800&h=600&fit=crop', // 长沙橘子洲
+    '昆明': 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=600&fit=crop', // 昆明春城
+    '大理': 'https://images.unsplash.com/photo-1501785888041-af3ef281b399?w=800&h=600&fit=crop', // 大理古城
     '拉萨': 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=600&fit=crop', // 拉萨布达拉宫
-    // 亚洲重要城市
-    '东京': 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&h=600&fit=crop', // 东京塔
-    '京都': 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=600&fit=crop', // 金阁寺
-    '首尔': 'https://images.unsplash.com/photo-1538485399081-7191377e8241?w=800&h=600&fit=crop', // 景福宫
-    '曼谷': 'https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&h=600&fit=crop', // 曼谷大皇宫
-    '新加坡': 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&h=600&fit=crop', // 滨海湾金沙
-    '巴厘岛': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop', // 巴厘岛海滩
-    '马尔代夫': 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&h=600&fit=crop', // 马尔代夫水屋
-    '迪拜': 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&h=600&fit=crop', // 哈利法塔
-    // 欧洲重要城市
-    '巴黎': 'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800&h=600&fit=crop', // 埃菲尔铁塔
-    '伦敦': 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&h=600&fit=crop', // 伦敦眼
-    '罗马': 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=800&h=600&fit=crop', // 罗马斗兽场
-    '威尼斯': 'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=800&h=600&fit=crop', // 威尼斯运河
-    '圣托里尼': 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop', // 圣托里尼蓝顶
-    '巴塞罗那': 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800&h=600&fit=crop', // 圣家堂
-    '阿姆斯特丹': 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop', // 阿姆斯特丹运河
-    '柏林': 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop', // 柏林风光
-    '维也纳': 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop', // 维也纳老城
-    '布拉格': 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop', // 布拉格广场
-    // 美洲重要城市
-    '纽约': 'https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=800&h=600&fit=crop', // 自由女神像
-    '洛杉矶': 'https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=800&h=600&fit=crop', // 洛杉矶日落
-    '旧金山': 'https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=800&h=600&fit=crop', // 金门大桥
-    '拉斯维加斯': 'https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=800&h=600&fit=crop', // 拉斯维加斯夜景
-    '迈阿密': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop', // 迈阿密海滩
-    '多伦多': 'https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=800&h=600&fit=crop', // 多伦多CN塔
-    '温哥华': 'https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=800&h=600&fit=crop', // 温哥华风光
-    '坎昆': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop', // 坎昆海滩
-    // 大洋洲重要城市
-    '悉尼': 'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=800&h=600&fit=crop', // 悉尼歌剧院
-    '墨尔本': 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop', // 墨尔本风光
-    '布里斯班': 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop', // 布里斯班河
-    '黄金海岸': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop', // 黄金海岸海滩
-    '奥克兰': 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop', // 奥克兰天空塔
-    '皇后镇': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop', // 皇后镇风光
-    '斐济': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop', // 斐济海滩
-    // 非洲重要城市
-    '开罗': 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=800&h=600&fit=crop', // 金字塔
-    '开普敦': 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop', // 桌山
-    '马拉喀什': 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=600&fit=crop', // 马拉喀什老城
-    '毛里求斯': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop', // 毛里求斯海滩
-    '塞舌尔': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop', // 塞舌尔海滩
   };
 
   // 通用图片模板（大幅扩展，确保足够多样化）
