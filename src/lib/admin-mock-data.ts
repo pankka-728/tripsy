@@ -554,7 +554,7 @@ const generateDestinations = (): DestinationAdmin[] => {
   ];
   
   let idCounter = 1;
-  allDestinations.forEach((dest: any, index: number) => {
+  allDestinations.forEach((dest: DestinationAdmin, index: number) => {
     // 优先使用专门配置的当地风景图片，如果没有则使用智能分配的通用图片
     let imageUrl: string;
     

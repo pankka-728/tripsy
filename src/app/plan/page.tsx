@@ -84,9 +84,9 @@ export default function PlanPage() {
 
   const togglePreference = (value: string) => {
     const currentPrefs = formData.preferences || [];
-    const newPrefs = currentPrefs.includes(value as any)
+    const newPrefs = currentPrefs.includes(value)
       ? currentPrefs.filter(p => p !== value)
-      : [...currentPrefs, value as any];
+      : [...currentPrefs, value];
     setFormData({ ...formData, preferences: newPrefs });
   };
 
@@ -387,7 +387,7 @@ export default function PlanPage() {
                       <div key={pref.value} className="flex items-center space-x-2">
                         <Checkbox
                           id={`pref-${pref.value}`}
-                          checked={formData.preferences?.includes(pref.value as any)}
+                          checked={formData.preferences?.includes(pref.value as string)}
                           onCheckedChange={(checked) => {
                             if (checked) {
                               togglePreference(pref.value);

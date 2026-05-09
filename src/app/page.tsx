@@ -256,7 +256,7 @@ export default function Home() {
                       />
                     ))}
                   </div>
-                  <p className="text-gray-700 mb-6 leading-relaxed">"{testimonial.comment}"</p>
+                  <p className="text-gray-700 mb-6 leading-relaxed">&quot;{testimonial.comment}&quot;</p>
                   <div className="flex items-center gap-4">
                     <Avatar>
                       <AvatarImage src={testimonial.avatar} alt={testimonial.name} />

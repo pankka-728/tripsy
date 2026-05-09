@@ -216,7 +216,7 @@ export default function DestinationsPage() {
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-bold text-gray-900">
               {filteredDestinations.length} 个目的地
-              {searchTerm && <span className="text-gray-500 text-lg ml-2">（搜索："{searchTerm}"）</span>}
+              {searchTerm && <span className="text-gray-500 text-lg ml-2">（搜索：&quot;{searchTerm}&quot;）</span>}
             </h2>
             {filteredDestinations.length > 0 && (
               <div className="text-sm text-gray-500">

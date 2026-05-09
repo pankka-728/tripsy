@@ -21,7 +21,7 @@ export default function PrivacyPage() {
             <CardContent className="p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">概述</h2>
               <p className="text-gray-600 leading-relaxed">
-                Tripsy（以下简称"我们"）非常重视用户的隐私保护。本隐私政策旨在向您说明我们如何收集、使用、存储和保护您的个人信息。
+                Tripsy（以下简称&quot;我们&quot;）非常重视用户的隐私保护。本隐私政策旨在向您说明我们如何收集、使用、存储和保护您的个人信息。
                 使用我们的服务即表示您同意本隐私政策的内容。如果您不同意本政策的任何内容，请不要使用我们的服务。
               </p>
             </CardContent>

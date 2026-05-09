@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 import { User, AuthState, MOCK_USER } from '@/types/member';
 
 interface AuthContextType extends AuthState {
-  login: (method: 'phone' | 'email' | 'wechat', data?: any) => Promise<boolean>;
+  login: (method: 'phone' | 'email' | 'wechat', data?: Record<string, unknown>) => Promise<boolean>;
   logout: () => void;
   updateUser: (userData: Partial<User>) => void;
 }

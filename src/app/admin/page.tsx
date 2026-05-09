@@ -18,7 +18,7 @@ import { MOCK_DASHBOARD_STATS } from '@/lib/admin-mock-data';
 interface StatCardProps { 
   title: string; 
   value: string | number; 
-  icon: any;
+  icon: React.ElementType;
   trend?: 'up' | 'down';
   trendValue?: string;
   href?: string;
