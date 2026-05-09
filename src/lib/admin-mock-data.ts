@@ -506,7 +506,8 @@ const generateDestinations = (): DestinationAdmin[] => {
     '厦门': 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=800&h=600&fit=crop', // 厦门鼓浪屿
     '苏州': 'https://images.unsplash.com/photo-1534329539061-64caeb388c42?w=800&h=600&fit=crop', // 苏州园林
     '南京': 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&h=600&fit=crop', // 南京夫子庙
-    '重庆': 'https://images.unsplash.com/photo-1586816879360-004f5b0c51e5?w=800&h=600&fit=crop', // 重庆夜景
+    '重庆': 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800&h=600&fit=crop', // 重庆夜景（洪崖洞）
+    '贵阳': 'https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&h=600&fit=crop', // 贵阳甲秀楼/黔灵山
     '广州': 'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=800&h=600&fit=crop', // 广州塔
     '深圳': 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&h=600&fit=crop', // 深圳天际线
     '青岛': 'https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=800&h=600&fit=crop', // 青岛海景
