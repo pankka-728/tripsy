@@ -172,7 +172,7 @@ export default function PlanPage() {
                   <Label className="text-base font-medium">交通方式</Label>
                   <RadioGroup 
                     value={formData.transportationType} 
-                    onValueChange={(value: any) => setFormData({ ...formData, transportationType: value })}
+                    onValueChange={(value: string) => setFormData({ ...formData, transportationType: value })}
                     className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4"
                   >
                     {TRANSPORTATION_TYPES.map((type) => (
@@ -195,7 +195,7 @@ export default function PlanPage() {
                   <Label className="text-base font-medium">出行性质</Label>
                   <RadioGroup 
                     value={formData.travelType} 
-                    onValueChange={(value: any) => setFormData({ ...formData, travelType: value })}
+                    onValueChange={(value: string) => setFormData({ ...formData, travelType: value })}
                     className="grid grid-cols-2 md:grid-cols-3 gap-4"
                   >
                     {TRAVEL_TYPES.map((type) => (
@@ -325,7 +325,7 @@ export default function PlanPage() {
                       <Label>货币类型</Label>
                       <RadioGroup 
                         value={formData.budget?.currency} 
-                        onValueChange={(value: any) => setFormData({
+                        onValueChange={(value: string) => setFormData({
                           ...formData,
                           budget: { ...formData.budget!, currency: value }
                         })}
@@ -387,7 +387,7 @@ export default function PlanPage() {
                       <div key={pref.value} className="flex items-center space-x-2">
                         <Checkbox
                           id={`pref-${pref.value}`}
-                          checked={formData.preferences?.includes(pref.value as string)}
+                          checked={formData.preferences?.includes(pref.value)}
                           onCheckedChange={(checked) => {
                             if (checked) {
                               togglePreference(pref.value);

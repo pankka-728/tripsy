@@ -49,7 +49,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     checkAuth();
   }, []);
 
-  const login = async (method: 'phone' | 'email' | 'wechat', data?: any): Promise<boolean> => {
+  const login = async (method: 'phone' | 'email' | 'wechat', data?: Record<string, unknown>): Promise<boolean> => {
     // 模拟登录过程
     setAuthState(prev => ({ ...prev, loading: true }));
     
