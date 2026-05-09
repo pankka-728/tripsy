@@ -66,6 +66,7 @@ export interface DestinationAdmin {
   nameEn?: string;
   country: string;
   city?: string;
+  region?: string;
   description: string;
   shortDescription?: string;
   imageUrl: string;
