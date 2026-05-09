@@ -26,7 +26,7 @@ const transformDestinations = MOCK_DESTINATIONS.filter(d => d.status === 'active
   country: dest.country,
   region: dest.region as string,
   description: dest.description,
-  image: `https://images.unsplash.com/photo-${1500000000000 + Math.floor(Math.random() * 10000000)}?auto=format&fit=crop&w=800&q=80`,
+  image: dest.imageUrl,
   highlights: dest.tags,
   bestSeason: dest.bestSeason,
   suggestedDays: dest.suggestedDays,
@@ -231,12 +231,18 @@ export default function DestinationsPage() {
                 <Link href={`/plan?destination=${dest.id}`} key={dest.id}>
                   <Card className="border-0 overflow-hidden shadow-lg hover:shadow-xl transition-all group cursor-pointer h-full">
                     <div className="relative h-56 overflow-hidden">
-                      <div className="w-full h-full bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 flex items-center justify-center">
-                        <div className="text-center text-white">
-                          <MapPin className="w-12 h-12 mx-auto mb-2 opacity-80" />
-                          <span className="text-lg font-bold">{dest.name}</span>
+                      {dest.image ? (
+                        <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${dest.image})` }}>
+                          <div className="w-full h-full bg-black/30"></div>
                         </div>
-                      </div>
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 flex items-center justify-center">
+                          <div className="text-center text-white">
+                            <MapPin className="w-12 h-12 mx-auto mb-2 opacity-80" />
+                            <span className="text-lg font-bold">{dest.name}</span>
+                          </div>
+                        </div>
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                       {dest.isPopular && (
                         <div className="absolute top-4 right-4">
