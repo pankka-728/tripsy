@@ -1,5 +1,11 @@
 # 🚀 Coze 平台快速部署指南
 
+## ⚠️ 重要提示
+**中国地区用户请使用 coze.cn**  
+- 访问地址：https://www.coze.cn  
+- 文档地址：https://docs.coze.cn  
+- coze.com 在部分地区不可用，请务必使用 coze.cn
+
 ## 5分钟快速上手指南
 
 ### 前置条件
@@ -39,7 +45,7 @@ git push -u origin main
 
 ## 步骤二：登录 Coze 平台
 
-1. 访问 [Coze 官网](https://www.coze.com)
+1. 访问 [Coze 官网](https://www.coze.cn)（中国地区使用 coze.cn）
 2. 注册/登录你的 Coze 账号
 3. 进入工作台
 
@@ -228,7 +234,7 @@ A: 检查：
 
 ## 需要帮助？
 
-- 查看 Coze 官方文档：https://docs.coze.com
+- 查看 Coze 官方文档：https://docs.coze.cn
 - 联系 Coze 技术支持
 - 查看项目 README.md 和 DEPLOY.md 获取更多详细信息
 

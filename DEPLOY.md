@@ -61,7 +61,7 @@ COZE_BOT_ID=your-bot-id
    - 完整的源代码
 
 ### 步骤 2: Coze 平台部署
-1. 登录 [Coze 平台](https://www.coze.com)
+1. 登录 [Coze 平台](https://www.coze.cn)（中国地区使用 coze.cn）
 2. 创建新项目或导入现有项目
 3. 连接你的 Git 仓库
 4. 配置环境变量（在 Coze 平台设置中）
