@@ -289,28 +289,28 @@ export default function LoginPage() {
             <div className="flex items-start gap-3">
               <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-medium text-gray-900">专属优惠</h4>
-                <p className="text-sm text-gray-600">会员专享折扣价格</p>
+                <h4 className="font-medium text-gray-900">专业定制</h4>
+                <p className="text-sm text-gray-600">1对1专属行程规划</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
               <div>
                 <h4 className="font-medium text-gray-900">积分奖励</h4>
-                <p className="text-sm text-gray-600">消费累积积分兑换</p>
+                <p className="text-sm text-gray-600">定制累积积分兑换</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
               <div>
                 <h4 className="font-medium text-gray-900">行程管理</h4>
-                <p className="text-sm text-gray-600">历史行程随时查看</p>
+                <p className="text-sm text-gray-600">历史定制随时查看</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-medium text-gray-900">专属客服</h4>
+                <h4 className="font-medium text-gray-900">专属顾问</h4>
                 <p className="text-sm text-gray-600">1对1贴心服务</p>
               </div>
             </div>

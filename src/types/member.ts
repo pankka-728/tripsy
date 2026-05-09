@@ -92,33 +92,29 @@ export const MEMBERSHIP_LEVELS = {
     name: '普通会员',
     icon: 'user',
     color: 'gray',
-    discount: 1.0,
     pointsMultiplier: 1,
-    benefits: ['基础服务', '积分积累']
+    benefits: ['基础定制服务', '积分积累', '标准行程规划']
   },
   silver: {
     name: '银卡会员',
     icon: 'award',
     color: 'gray',
-    discount: 0.95,
     pointsMultiplier: 1.5,
-    benefits: ['95折优惠', '1.5倍积分', '专属客服']
+    benefits: ['1.5倍积分', '专属客服支持', '优先响应', '行程优化建议']
   },
   gold: {
     name: '金卡会员',
     icon: 'award',
     color: 'yellow',
-    discount: 0.9,
     pointsMultiplier: 2,
-    benefits: ['9折优惠', '2倍积分', '优先预订', '生日礼包']
+    benefits: ['2倍积分', 'VIP定制通道', '深度行程规划', '生日专属礼包', '出行前提醒']
   },
   platinum: {
     name: '白金会员',
     icon: 'crown',
     color: 'purple',
-    discount: 0.85,
     pointsMultiplier: 3,
-    benefits: ['85折优惠', '3倍积分', 'VIP通道', '专属定制', '免费保险']
+    benefits: ['3倍积分', '一对一专属顾问', '无限次行程修改', '紧急问题处理', '定制化行程文档', '专属旅行攻略']
   }
 };
 

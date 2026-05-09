@@ -158,9 +158,9 @@ export default function MemberCenterPage() {
             </Card>
             <Card className="bg-white/10 border-0 backdrop-blur">
               <CardContent className="p-4 text-center">
-                <Wallet className="h-6 w-6 mx-auto mb-2 text-green-300" />
-                <div className="text-2xl font-bold">{Math.round((1 - membershipInfo.discount) * 100)}%</div>
-                <div className="text-sm text-blue-100">会员折扣</div>
+                <MapPin className="h-6 w-6 mx-auto mb-2 text-green-300" />
+                <div className="text-2xl font-bold">{user.tripCount}</div>
+                <div className="text-sm text-blue-100">定制次数</div>
               </CardContent>
             </Card>
             <Card className="bg-white/10 border-0 backdrop-blur">
