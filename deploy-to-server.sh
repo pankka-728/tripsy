@@ -57,7 +57,7 @@ else
     # CentOS/RHEL 系
     $PKG_INSTALL curl git nginx
     # CentOS 安装 certbot
-    if ! command -v certbot &amp;&gt; /dev/null; then
+    if ! command -v certbot &gt; /dev/null 2&gt;&amp;1; then
         echo "🔧 安装 certbot..."
         $PKG_INSTALL epel-release
         $PKG_INSTALL certbot python3-certbot-nginx
