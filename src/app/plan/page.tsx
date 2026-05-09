@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { TravelRequest } from "@/types/travel";
-import { PREFERENCES, TRAVEL_TYPES, TRAVEL_STYLES, BUDGET_RANGES } from "@/lib/constants";
+import { PREFERENCES, TRAVEL_TYPES, TRANSPORTATION_TYPES, BUDGET_RANGES } from "@/lib/constants";
 
 export default function PlanPage() {
   const router = useRouter();
@@ -29,7 +29,7 @@ export default function PlanPage() {
       max: 20000,
       currency: "CNY"
     },
-    travelStyle: "free",
+    transportationType: "flight",
     travelType: "family",
     travelers: {
       adults: 2,
@@ -169,21 +169,22 @@ export default function PlanPage() {
                 </div>
 
                 <div className="space-y-4">
-                  <Label className="text-base font-medium">出行方式</Label>
+                  <Label className="text-base font-medium">交通方式</Label>
                   <RadioGroup 
-                    value={formData.travelStyle} 
-                    onValueChange={(value: any) => setFormData({ ...formData, travelStyle: value })}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-4"
+                    value={formData.transportationType} 
+                    onValueChange={(value: any) => setFormData({ ...formData, transportationType: value })}
+                    className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4"
                   >
-                    {TRAVEL_STYLES.map((style) => (
-                      <div key={style.value}>
-                        <RadioGroupItem value={style.value} id={style.value} className="peer sr-only" />
+                    {TRANSPORTATION_TYPES.map((type) => (
+                      <div key={type.value}>
+                        <RadioGroupItem value={type.value} id={type.value} className="peer sr-only" />
                         <Label 
-                          htmlFor={style.value} 
-                          className="flex flex-col p-4 border-2 rounded-lg cursor-pointer peer-data-[state=checked]:border-blue-600 peer-data-[state=checked]:bg-blue-50 hover:bg-gray-50 transition-all"
+                          htmlFor={type.value} 
+                          className="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer peer-data-[state=checked]:border-blue-600 peer-data-[state=checked]:bg-blue-50 hover:bg-gray-50 transition-all"
                         >
-                          <span className="font-semibold text-gray-900">{style.label}</span>
-                          <span className="text-sm text-gray-500">{style.description}</span>
+                          <span className="text-3xl mb-2">{type.icon}</span>
+                          <span className="font-semibold text-gray-900">{type.label}</span>
+                          <span className="text-xs text-gray-500 text-center">{type.description}</span>
                         </Label>
                       </div>
                     ))}

@@ -7,7 +7,7 @@ export interface TravelRequest {
     max: number;
     currency: 'CNY' | 'USD';
   };
-  travelStyle: 'free' | 'semi-free' | 'group';
+  transportationType: 'flight' | 'train' | 'self-drive' | 'bus' | 'mixed';
   travelType: 'family' | 'colleague' | 'friends' | 'honeymoon' | 'couple' | 'solo';
   travelers: {
     adults: number;

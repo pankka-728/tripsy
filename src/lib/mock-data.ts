@@ -11,7 +11,7 @@ export const MOCK_ITINERARY: Itinerary = {
       max: 25000,
       currency: "CNY"
     },
-    travelStyle: "free",
+    transportationType: "flight",
     travelType: "family",
     travelers: {
       adults: 2,

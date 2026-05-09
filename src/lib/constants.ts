@@ -162,10 +162,12 @@ export const TRAVEL_TYPES = [
   { value: "solo", label: "独自旅行", sublabel: "探索自我", icon: "🧳" }
 ];
 
-export const TRAVEL_STYLES = [
-  { value: "free", label: "自由行", description: "完全自主，灵活自由" },
-  { value: "semi-free", label: "半自由行", description: "部分安排，部分自由" },
-  { value: "group", label: "跟团定制", description: "专属小团，定制服务" }
+export const TRANSPORTATION_TYPES = [
+  { value: "flight", label: "飞机", description: "快速便捷，直达目的地", icon: "✈️" },
+  { value: "train", label: "高铁", description: "舒适平稳，欣赏沿途风景", icon: "🚄" },
+  { value: "self-drive", label: "自驾", description: "自由自在，随心所欲", icon: "🚗" },
+  { value: "bus", label: "大巴", description: "经济实惠，集体出行", icon: "🚌" },
+  { value: "mixed", label: "多种交通", description: "灵活组合，最优方案", icon: "🔄" }
 ];
 
 export const BUDGET_RANGES = {
