@@ -82,7 +82,7 @@ export const TESTIMONIALS: Testimonial[] = [
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
     destination: "日本东京",
     rating: 5,
-    comment: "Tripsy的AI规划师太专业了！为我们一家三口定制的东京行程完美平衡了观光、美食和购物，孩子玩得特别开心。价格透明，服务贴心！",
+    comment: "Tripsign的AI规划师太专业了！为我们一家三口定制的东京行程完美平衡了观光、美食和购物，孩子玩得特别开心。价格透明，服务贴心！",
     date: "2024-01-15"
   },
   {
@@ -91,7 +91,7 @@ export const TESTIMONIALS: Testimonial[] = [
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
     destination: "法国巴黎",
     rating: 5,
-    comment: "蜜月旅行选择了Tripsy，整个行程浪漫又贴心！从酒店选择到餐厅预订都非常完美，还收到了精美的纪念册，这是我们最美好的回忆！",
+    comment: "蜜月旅行选择了Tripsign，整个行程浪漫又贴心！从酒店选择到餐厅预订都非常完美，还收到了精美的纪念册，这是我们最美好的回忆！",
     date: "2024-01-10"
   },
   {

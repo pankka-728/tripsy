@@ -34,7 +34,7 @@ export function Navbar() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <MapPin className="h-6 w-6 text-blue-600" />
-          <span className="text-xl font-bold text-gray-900">Tripsy</span>
+          <span className="text-xl font-bold text-gray-900">Tripsign</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -121,7 +121,7 @@ export function Navbar() {
               <div className="flex items-center justify-between py-4">
                 <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
                   <MapPin className="h-6 w-6 text-blue-600" />
-                  <span className="text-xl font-bold text-gray-900">Tripsy</span>
+                  <span className="text-xl font-bold text-gray-900">Tripsign</span>
                 </Link>
                 <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
                   <X className="h-5 w-5" />

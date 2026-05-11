@@ -97,7 +97,7 @@ export default function LoginContent() {
         <div className="max-w-md mx-auto">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">登录 Tripsy</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">登录 Tripsign</h1>
             <p className="text-gray-600">登录后享受更多会员专属服务</p>
           </div>
 
@@ -228,7 +228,7 @@ export default function LoginContent() {
                       <MessageCircle className="w-24 h-24 text-green-500" />
                     </div>
                     <p className="text-gray-600 mb-4">使用微信扫一扫登录</p>
-                    <p className="text-sm text-gray-500">扫码后将自动登录 Tripsy</p>
+                    <p className="text-sm text-gray-500">扫码后将自动登录 Tripsign</p>
                   </div>
                   
                   <Button 

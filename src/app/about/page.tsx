@@ -21,7 +21,7 @@ export default function AboutPage() {
   ];
 
   const milestones = [
-    { year: "2020", title: "品牌创立", description: "Tripsy正式成立，开始AI旅游规划的探索" },
+    { year: "2020", title: "品牌创立", description: "Tripsign正式成立，开始AI旅游规划的探索" },
     { year: "2021", title: "产品上线", description: "第一代AI规划师上线，服务首批用户" },
     { year: "2022", title: "快速发展", description: "服务用户突破10万，覆盖100+目的地" },
     { year: "2023", title: "全新升级", description: "推出PDF游记和实体纪念册服务" },
@@ -33,7 +33,7 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">关于 Tripsy</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">关于 Tripsign</h1>
           <p className="text-xl text-white/90 max-w-2xl mx-auto">
             我们致力于用人工智能让每一次旅行都成为美好的回忆
           </p>
@@ -46,7 +46,7 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">我们的使命</h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Tripsy 成立于2020年，我们的使命是让每个人都能享受到专业、便捷、个性化的旅行规划服务。
+              Tripsign 成立于2020年，我们的使命是让每个人都能享受到专业、便捷、个性化的旅行规划服务。
               通过人工智能技术，我们希望打破传统旅行规划的壁垒，让定制旅行不再是少数人的专利。
             </p>
           </div>

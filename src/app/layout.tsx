@@ -6,8 +6,8 @@ import { AuthProvider } from '@/contexts/AuthContext';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Tripsy - 您的私人旅行规划师',
-    template: '%s | Tripsy',
+    default: 'Tripsign - 您的私人旅行规划师',
+    template: '%s | Tripsign',
   },
   description:
     'Tripsy是您的全球私人定制旅行专家，AI旅游规划师为您量身打造完美行程，智能报价，无限修改，生成精美PDF游记。',

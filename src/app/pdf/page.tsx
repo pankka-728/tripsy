@@ -149,7 +149,7 @@ export default function PDFPage() {
                         </div>
                       </div>
                       <div className="text-center opacity-70">
-                        <p>Tripsy 为您定制</p>
+                        <p>Tripsign 为您定制</p>
                         <p className="text-sm">www.tripsy.com</p>
                       </div>
                     </div>

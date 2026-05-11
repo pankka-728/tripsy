@@ -9,7 +9,7 @@ export function Footer() {
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <MapPin className="h-6 w-6 text-blue-400" />
-              <span className="text-xl font-bold text-white">Tripsy</span>
+              <span className="text-xl font-bold text-white">Tripsign</span>
             </div>
             <p className="text-sm text-gray-400 mb-4">
               您的私人旅行规划师，让每一次旅途都充满惊喜。
@@ -63,7 +63,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-gray-500 text-center">
-          <p>© 2024 Tripsy. 保留所有权利。</p>
+          <p>© 2024 Tripsign. 保留所有权利。</p>
         </div>
       </div>
     </footer>

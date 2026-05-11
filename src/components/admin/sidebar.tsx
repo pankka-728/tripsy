@@ -17,7 +17,7 @@ export function AdminSidebar() {
           <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-sm">T</span>
           </div>
-          <span className="text-xl font-bold text-gray-900">Tripsy Admin</span>
+          <span className="text-xl font-bold text-gray-900">Tripsign Admin</span>
         </Link>
       </div>
 

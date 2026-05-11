@@ -81,7 +81,7 @@ export default function Home() {
               </span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-              Tripsy AI旅游规划师为您量身定制全球旅行行程，实时联网查询，智能报价，无限次修改，生成精美游记。
+              Tripsign AI旅游规划师为您量身定制全球旅行行程，实时联网查询，智能报价，无限次修改，生成精美游记。
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="text-lg px-8 py-6 h-auto">
@@ -135,7 +135,7 @@ export default function Home() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">为什么选择 Tripsy</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">为什么选择 Tripsign</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">专业、智能、贴心的旅行规划服务</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -280,7 +280,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">准备好开始您的完美旅程了吗？</h2>
             <p className="text-xl text-white/90 mb-10">
-              让Tripsy AI旅游规划师为您打造独一无二的旅行体验
+              让Tripsign AI旅游规划师为您打造独一无二的旅行体验
             </p>
             <Button asChild size="lg" variant="secondary" className="text-lg px-8 py-6 h-auto bg-white text-blue-600 hover:bg-gray-100">
               <Link href="/plan">
