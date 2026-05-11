@@ -1,4 +1,5 @@
-import { Itinerary } from "@/types/travel";
+import { Itinerary, ItineraryDay, ItineraryActivity, HotelInfo, MealInfo, WeatherInfo } from "@/types/travel";
+import { getCityByName, CityInfo } from "@/lib/city-data";
 
 export const MOCK_ITINERARY: Itinerary = {
   id: "demo-1",
@@ -781,3 +782,515 @@ export const MOCK_ITINERARY: Itinerary = {
     }
   ]
 };
+
+// ============ 动态行程生成函数 ============
+
+interface ActivityTemplate {
+  type: 'sightseeing' | 'transport' | 'meal' | 'hotel' | 'free';
+  title: string;
+  description: string;
+  duration: string;
+  price?: number;
+}
+
+function generateActivitiesForDay(
+  city: CityInfo,
+  day: number,
+  totalDays: number,
+  isFirstDay: boolean,
+  isLastDay: boolean
+): ItineraryActivity[] {
+  const activities: ItineraryActivity[] = [];
+  const tags = city.tags;
+
+  if (isFirstDay) {
+    // 第一天：抵达 + 入住 + 市区初探
+    activities.push({
+      time: "14:00",
+      type: "transport",
+      title: `抵达${city.name}`,
+      description: `抵达${city.name}，办理入住手续，稍作休息`,
+      duration: "2小时",
+      location: `${city.name}市区`
+    });
+    activities.push({
+      time: "16:30",
+      type: "hotel",
+      title: "办理入住",
+      description: `在${city.name}市中心酒店办理入住`,
+      duration: "30分钟",
+      location: `${city.name}市中心`
+    });
+    activities.push({
+      time: "17:30",
+      type: "sightseeing",
+      title: `${city.name}市区初探`,
+      description: `漫步${city.name}市中心，感受当地城市氛围，熟悉周边环境`,
+      duration: "1.5小时",
+      location: `${city.name}市中心`
+    });
+    activities.push({
+      time: "19:00",
+      type: "meal",
+      title: "欢迎晚餐",
+      description: `品尝${city.name}当地特色美食，开启美好旅程`,
+      duration: "1.5小时",
+      location: `${city.name}特色餐厅`,
+      price: 200
+    });
+  } else if (isLastDay) {
+    // 最后一天：购物/最后景点 + 返程
+    activities.push({
+      time: "09:00",
+      type: "sightseeing",
+      title: `最后的${city.name}记忆`,
+      description: `前往${city.name}当地特色街区，选购伴手礼`,
+      duration: "2小时",
+      location: `${city.name}特色街区`
+    });
+    activities.push({
+      time: "12:00",
+      type: "meal",
+      title: "告别午餐",
+      description: `享用最后一顿${city.name}美食，为旅程画上圆满句号`,
+      duration: "1.5小时",
+      location: `${city.name}人气餐厅`,
+      price: 150
+    });
+    activities.push({
+      time: "14:00",
+      type: "hotel",
+      title: "退房",
+      description: "办理退房手续，整理行李",
+      duration: "30分钟",
+      location: "酒店"
+    });
+    activities.push({
+      time: "15:00",
+      type: "transport",
+      title: "前往机场/车站",
+      description: `前往${city.name}机场/车站，准备返程`,
+      duration: "1.5小时",
+      location: `${city.name}机场/车站`
+    });
+  } else {
+    // 中间天数：根据城市标签生成不同活动
+    const morningActivities: ItineraryActivity[] = [];
+    const afternoonActivities: ItineraryActivity[] = [];
+    const eveningActivities: ItineraryActivity[] = [];
+
+    // 上午活动
+    if (tags.includes('历史文化') || tags.includes('古迹') || tags.includes('古都') || tags.includes('寺庙') || tags.includes('世界遗产')) {
+      morningActivities.push({
+        time: "09:00",
+        type: "sightseeing",
+        title: `${city.name}历史古迹游览`,
+        description: `参观${city.name}著名的历史文化景点，感受千年文化底蕴`,
+        duration: "2.5小时",
+        location: `${city.name}历史古迹区`,
+        price: 80
+      });
+    } else if (tags.includes('自然风光') || tags.includes('山水') || tags.includes('雪山') || tags.includes('湖泊')) {
+      morningActivities.push({
+        time: "09:00",
+        type: "sightseeing",
+        title: `${city.name}自然风光`,
+        description: `前往${city.name}著名的自然景区，欣赏壮丽风光`,
+        duration: "3小时",
+        location: `${city.name}自然风景区`,
+        price: 120
+      });
+    } else if (tags.includes('海滩') || tags.includes('海岛') || tags.includes('海岛度假')) {
+      morningActivities.push({
+        time: "09:00",
+        type: "sightseeing",
+        title: `${city.name}海滩时光`,
+        description: `在${city.name}美丽的海滩享受阳光沙滩，尽情放松`,
+        duration: "3小时",
+        location: `${city.name}海滩`,
+        price: 50
+      });
+    } else {
+      morningActivities.push({
+        time: "09:00",
+        type: "sightseeing",
+        title: `${city.name}地标打卡`,
+        description: `游览${city.name}最具代表性的地标建筑和景点`,
+        duration: "2.5小时",
+        location: `${city.name}地标区`,
+        price: 60
+      });
+    }
+
+    // 午餐
+    morningActivities.push({
+      time: "12:30",
+      type: "meal",
+      title: "特色午餐",
+      description: `品尝${city.name}地道美食，体验当地饮食文化`,
+      duration: "1.5小时",
+      location: `${city.name}人气餐厅`,
+      price: 100
+    });
+
+    // 下午活动
+    if (tags.includes('购物') || tags.includes('都市')) {
+      afternoonActivities.push({
+        time: "14:30",
+        type: "sightseeing",
+        title: `${city.name}购物时光`,
+        description: `逛${city.name}著名的购物街区，选购心仪商品`,
+        duration: "2.5小时",
+        location: `${city.name}购物区`,
+        price: 0
+      });
+    } else if (tags.includes('美食') || tags.includes('火锅') || tags.includes('茶文化')) {
+      afternoonActivities.push({
+        time: "14:30",
+        type: "sightseeing",
+        title: `${city.name}美食探索`,
+        description: `深入${city.name}美食街区，发现隐藏的美味`,
+        duration: "2.5小时",
+        location: `${city.name}美食街`,
+        price: 80
+      });
+    } else if (tags.includes('博物馆') || tags.includes('艺术') || tags.includes('文化')) {
+      afternoonActivities.push({
+        time: "14:30",
+        type: "sightseeing",
+        title: `${city.name}文化之旅`,
+        description: `参观${city.name}博物馆或艺术馆，深入了解当地文化`,
+        duration: "2.5小时",
+        location: `${city.name}博物馆`,
+        price: 50
+      });
+    } else {
+      afternoonActivities.push({
+        time: "14:30",
+        type: "sightseeing",
+        title: `${city.name}深度游览`,
+        description: `继续探索${city.name}的精彩景点，发现更多惊喜`,
+        duration: "2.5小时",
+        location: `${city.name}景区`,
+        price: 60
+      });
+    }
+
+    // 晚上活动
+    if (day % 2 === 0) {
+      eveningActivities.push({
+        time: "18:00",
+        type: "meal",
+        title: "晚餐时光",
+        description: `享用${city.name}特色晚餐，品味当地风味`,
+        duration: "1.5小时",
+        location: `${city.name}特色餐厅`,
+        price: 150
+      });
+      eveningActivities.push({
+        time: "20:00",
+        type: "sightseeing",
+        title: `${city.name}夜景`,
+        description: `欣赏${city.name}璀璨夜景，感受城市另一面`,
+        duration: "1.5小时",
+        location: `${city.name}夜景观赏点`
+      });
+    } else {
+      eveningActivities.push({
+        time: "18:00",
+        type: "meal",
+        title: "晚餐时光",
+        description: `在${city.name}享用丰盛的晚餐`,
+        duration: "1.5小时",
+        location: `${city.name}餐厅`,
+        price: 150
+      });
+      eveningActivities.push({
+        time: "20:00",
+        type: "free",
+        title: "自由时光",
+        description: `自由安排晚间活动，或在酒店休息`,
+        duration: "2小时",
+        location: "自由活动"
+      });
+    }
+
+    activities.push(...morningActivities, ...afternoonActivities, ...eveningActivities);
+  }
+
+  return activities;
+}
+
+function generateMealsForDay(
+  city: CityInfo,
+  isFirstDay: boolean,
+  isLastDay: boolean
+): MealInfo[] {
+  const meals: MealInfo[] = [];
+  const cuisine = city.country === '中国' ? '中式料理' : `${city.country}料理`;
+
+  if (!isFirstDay) {
+    meals.push({
+      time: "08:00",
+      type: "breakfast",
+      restaurantName: "酒店早餐",
+      cuisine: "自助早餐",
+      pricePerPerson: 0,
+      recommendedDishes: ["当地特色早点", "粥品", "小菜"],
+      address: "酒店内",
+      rating: 4.2,
+      image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&q=80"
+    });
+  }
+
+  if (!isFirstDay && !isLastDay) {
+    meals.push({
+      time: "12:30",
+      type: "lunch",
+      restaurantName: `${city.name}特色餐厅`,
+      cuisine: cuisine,
+      pricePerPerson: 80,
+      recommendedDishes: ["当地招牌菜", "特色小炒", "时令蔬菜"],
+      address: `${city.name}市中心`,
+      rating: 4.3,
+      image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80"
+    });
+  }
+
+  if (!isLastDay) {
+    meals.push({
+      time: "18:30",
+      type: "dinner",
+      restaurantName: `${city.name}人气餐厅`,
+      cuisine: cuisine,
+      pricePerPerson: 120,
+      recommendedDishes: ["当地名菜", "特色汤品", "主食"],
+      address: `${city.name}市中心`,
+      rating: 4.4,
+      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80"
+    });
+  }
+
+  return meals;
+}
+
+function generateHotel(city: CityInfo): HotelInfo {
+  const starRating = city.suggestedDays >= 4 ? 4 : 3;
+  const pricePerNight = city.country === '中国' ? 400 : 600;
+
+  return {
+    name: `${city.name}市中心酒店`,
+    starRating,
+    location: `${city.name}市中心`,
+    pricePerNight,
+    amenities: ["免费WiFi", "空调", "24小时热水", "行李寄存"],
+    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80",
+    rating: 4.2 + Math.random() * 0.6,
+    reviews: Math.floor(1000 + Math.random() * 2000),
+    cancelable: true
+  };
+}
+
+function generateWeather(day: number): WeatherInfo {
+  const conditions: ('sunny' | 'cloudy' | 'rainy' | 'snowy')[] = ['sunny', 'cloudy', 'rainy', 'sunny'];
+  const condition = conditions[day % conditions.length];
+  const descriptions = {
+    sunny: "晴朗舒适",
+    cloudy: "多云宜人",
+    rainy: "小雨转晴",
+    snowy: "小雪"
+  };
+  const clothingAdvice = {
+    sunny: "建议穿轻便衣物，注意防晒",
+    cloudy: "穿长袖衬衫，带件薄外套",
+    rainy: "携带雨具，穿防滑鞋",
+    snowy: "穿保暖衣物，注意防寒"
+  };
+
+  return {
+    date: `2024-04-${14 + day}`,
+    highTemp: 18 + Math.floor(Math.random() * 8),
+    lowTemp: 8 + Math.floor(Math.random() * 8),
+    condition,
+    description: descriptions[condition],
+    clothingAdvice: clothingAdvice[condition]
+  };
+}
+
+function generateHighlights(city: CityInfo, days: number): string[] {
+  const highlights: string[] = [];
+  const tags = city.tags;
+
+  highlights.push(`${city.name}${tags[0] || '特色'}体验`);
+  highlights.push(`${city.name}地标打卡`);
+  if (tags.includes('美食') || tags.includes('火锅')) {
+    highlights.push(`${city.name}美食之旅`);
+  }
+  if (tags.includes('历史文化') || tags.includes('古迹')) {
+    highlights.push(`${city.name}历史文化探索`);
+  }
+  if (tags.includes('自然风光') || tags.includes('山水')) {
+    highlights.push(`${city.name}自然风光欣赏`);
+  }
+  if (tags.includes('海滩') || tags.includes('海岛')) {
+    highlights.push(`${city.name}海滩休闲时光`);
+  }
+  highlights.push(`${city.name}当地生活体验`);
+  highlights.push(`${days}天深度游览${city.name}`);
+
+  return highlights.slice(0, 6);
+}
+
+function generateTips(city: CityInfo): string[] {
+  const tips: string[] = [
+    `建议提前了解${city.name}当地天气，准备合适的衣物`,
+    `${city.name}旅游旺季人流量较大，建议提前预订酒店和景点门票`,
+    `尊重${city.name}当地风俗习惯，文明旅游`,
+    `保管好个人财物，注意出行安全`,
+    `品尝${city.name}当地美食时，注意食品卫生`,
+    `建议购买旅游保险，保障出行安全`
+  ];
+
+  if (city.country !== '中国') {
+    tips.push(`前往${city.country}需提前办理签证，准备好相关材料`);
+    tips.push(`了解${city.country}当地的电源插头和电压标准，准备转换插头`);
+  }
+
+  return tips;
+}
+
+function generateBudget(city: CityInfo, days: number, travelers: number): { total: number; currency: 'CNY' | 'USD'; items: { category: 'transportation' | 'accommodation' | 'tickets' | 'dining' | 'service' | 'other'; name: string; amount: number }[] } {
+  const isDomestic = city.country === '中国';
+  const currency: 'CNY' | 'USD' = 'CNY';
+
+  const flightPrice = isDomestic ? 1500 : 5000;
+  const hotelPricePerNight = isDomestic ? 400 : 800;
+  const ticketPricePerDay = isDomestic ? 100 : 200;
+  const diningPricePerDay = isDomestic ? 200 : 300;
+
+  const items = [
+    { category: 'transportation' as const, name: isDomestic ? '往返机票/高铁' : '国际机票（往返）', amount: flightPrice * travelers },
+    { category: 'transportation' as const, name: `${city.name}当地交通`, amount: 50 * days * travelers },
+    { category: 'accommodation' as const, name: `${city.name}酒店${days}晚`, amount: hotelPricePerNight * days },
+    { category: 'tickets' as const, name: '景点门票', amount: ticketPricePerDay * days * travelers },
+    { category: 'dining' as const, name: '餐饮费用', amount: diningPricePerDay * days * travelers },
+    { category: 'service' as const, name: '规划服务费', amount: 300 },
+    { category: 'other' as const, name: '其他杂费', amount: 500 * travelers }
+  ];
+
+  const total = items.reduce((sum, item) => sum + item.amount, 0);
+
+  return { total, currency, items };
+}
+
+export function generateDynamicItinerary(
+  destinations: string[],
+  days: number,
+  travelers: number
+): Itinerary {
+  const primaryCity = destinations[0] || '北京';
+  const cityInfo = getCityByName(primaryCity);
+
+  if (!cityInfo) {
+    // 如果找不到城市，返回默认行程
+    return {
+      ...MOCK_ITINERARY,
+      id: `demo-${Date.now()}`,
+      request: {
+        ...MOCK_ITINERARY.request,
+        days,
+        destinations,
+        travelers: {
+          ...MOCK_ITINERARY.request.travelers,
+          adults: travelers
+        }
+      },
+      title: `${primaryCity} ${days}日定制之旅`,
+      description: `为您精心策划的${primaryCity}${days}日定制行程，涵盖当地最精彩的景点和体验。`
+    };
+  }
+
+  const itineraryDays: ItineraryDay[] = [];
+  const hotel = generateHotel(cityInfo);
+
+  for (let day = 1; day <= days; day++) {
+    const isFirstDay = day === 1;
+    const isLastDay = day === days;
+
+    itineraryDays.push({
+      day,
+      date: `2024-04-${14 + day}`,
+      title: isFirstDay
+        ? `抵达${cityInfo.name}，开启美好旅程`
+        : isLastDay
+          ? `告别${cityInfo.name}，满载而归`
+          : `${cityInfo.name}精彩第${day}天`,
+      activities: generateActivitiesForDay(cityInfo, day, days, isFirstDay, isLastDay),
+      hotel: isLastDay ? hotel : hotel,
+      meals: generateMealsForDay(cityInfo, isFirstDay, isLastDay),
+      weather: generateWeather(day)
+    });
+  }
+
+  const budget = generateBudget(cityInfo, days, travelers);
+  const highlights = generateHighlights(cityInfo, days);
+  const tips = generateTips(cityInfo);
+
+  return {
+    id: `demo-${Date.now()}`,
+    request: {
+      departureDate: "2024-04-15",
+      days,
+      destinations,
+      budget: {
+        min: Math.round(budget.total * 0.8),
+        max: Math.round(budget.total * 1.2),
+        currency: budget.currency
+      },
+      transportationType: "flight",
+      travelType: "family",
+      travelers: {
+        adults: travelers,
+        children: 0,
+        seniors: 0
+      },
+      preferences: ["culture", "food", "relax"],
+      specialRequirements: ""
+    },
+    title: destinations.length === 1
+      ? `${destinations[0]} ${days}日定制之旅`
+      : `${destinations.join('·')} ${days}日定制之旅`,
+    description: destinations.length === 1
+      ? `为您精心策划的${destinations[0]}${days}日定制行程，${cityInfo.tags.join('、')}，让您充分体验当地风情。`
+      : `为您精心策划的${destinations.join('至')} ${days}日定制行程，涵盖各地最精彩的景点和体验。`,
+    days: itineraryDays,
+    budget,
+    transportation: [
+      {
+        type: "flight",
+        from: "出发地",
+        to: `${cityInfo.name}`,
+        departureTime: "09:00",
+        arrivalTime: "13:00",
+        price: cityInfo.country === '中国' ? 1500 : 5000,
+        operator: cityInfo.country === '中国' ? '中国国航' : '国际航空',
+        details: "经济舱，含行李"
+      },
+      {
+        type: "flight",
+        from: `${cityInfo.name}`,
+        to: "出发地",
+        departureTime: "15:00",
+        arrivalTime: "19:00",
+        price: cityInfo.country === '中国' ? 1500 : 5000,
+        operator: cityInfo.country === '中国' ? '中国国航' : '国际航空',
+        details: "经济舱，含行李"
+      }
+    ],
+    highlights,
+    tips,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+}
+

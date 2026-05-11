@@ -27,7 +27,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { MOCK_ITINERARY } from "@/lib/mock-data";
+import { MOCK_ITINERARY, generateDynamicItinerary } from "@/lib/mock-data";
 import { Itinerary } from "@/types/travel";
 
 export default function ItineraryContent() {
@@ -51,27 +51,7 @@ export default function ItineraryContent() {
         : ["东京", "京都"];
       
       // 生成动态行程数据
-      const dynamicItinerary: Itinerary = {
-        ...MOCK_ITINERARY,
-        id: `demo-${Date.now()}`,
-        request: {
-          ...MOCK_ITINERARY.request,
-          days: days,
-          destinations: destinations,
-          travelers: {
-            ...MOCK_ITINERARY.request.travelers,
-            adults: travelers
-          }
-        },
-        title: destinations.length === 1 
-          ? `${destinations[0]} ${days}日定制之旅`
-          : `${destinations.join('·')} ${days}日定制之旅`,
-        description: destinations.length === 1
-          ? `为您精心策划的${destinations[0]}${days}日定制行程，涵盖当地最精彩的景点和体验。`
-          : `为您精心策划的${destinations.join('至')} ${days}日定制行程，涵盖各地最精彩的景点和体验。`,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      };
+      const dynamicItinerary = generateDynamicItinerary(destinations, days, travelers);
       
       setTimeout(() => {
         setItinerary(dynamicItinerary);

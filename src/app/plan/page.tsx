@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Calendar as CalendarIcon, MapPin, Users, DollarSign, Sparkles, CheckCircle, Plus, X } from "lucide-react";
+import CitySearch from "@/components/city-search";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -290,11 +291,10 @@ export default function PlanPage() {
                       <div key={index} className="flex gap-4 items-start">
                         <div className="flex-1">
                           <Label htmlFor={`dest-${index}`} className="sr-only">目的地 {index + 1}</Label>
-                          <Input
-                            id={`dest-${index}`}
-                            placeholder="例如：巴黎、东京、巴厘岛..."
+                          <CitySearch
                             value={dest}
-                            onChange={(e) => updateDestination(index, e.target.value)}
+                            onChange={(value) => updateDestination(index, value)}
+                            placeholder="输入城市名称搜索..."
                           />
                         </div>
                         {destinations.length > 1 && (
