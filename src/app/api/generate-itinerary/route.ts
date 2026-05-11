@@ -64,6 +64,28 @@ async function searchDestinationInfo(city: string): Promise<string> {
   }
 }
 
+// 解析 SSE 流响应，拼接所有 content
+function parseSSEStream(text: string): string {
+  const lines = text.split("\n");
+  let content = "";
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed.startsWith("data: ")) continue;
+    const jsonStr = trimmed.slice(6).trim();
+    if (jsonStr === "[DONE]") continue;
+    try {
+      const chunk = JSON.parse(jsonStr);
+      const delta = chunk.choices?.[0]?.delta;
+      if (delta && typeof delta.content === "string") {
+        content += delta.content;
+      }
+    } catch {
+      // 忽略无法解析的行
+    }
+  }
+  return content;
+}
+
 // 调用大模型生成行程
 async function generateItineraryWithLLM(prompt: string): Promise<string> {
   const res = await fetch(`${MODEL_BASE_URL}/chat/completions`, {
@@ -83,7 +105,7 @@ async function generateItineraryWithLLM(prompt: string): Promise<string> {
         { role: "user", content: prompt },
       ],
       temperature: 0.7,
-      stream: false,
+      stream: true,
     }),
   });
 
@@ -92,9 +114,8 @@ async function generateItineraryWithLLM(prompt: string): Promise<string> {
     throw new Error(`LLM API error ${res.status}: ${errorText.slice(0, 200)}`);
   }
 
-  const data = await res.json();
-  const content = data.choices?.[0]?.message?.content || "";
-  return content;
+  const text = await res.text();
+  return parseSSEStream(text);
 }
 
 // 解析大模型返回的 JSON
