@@ -64,10 +64,11 @@ async function searchDestinationInfo(city: string): Promise<string> {
   }
 }
 
-// 解析 SSE 流响应，拼接所有 content
+// 解析 SSE 流响应，拼接所有 content（兼容思考模式模型）
 function parseSSEStream(text: string): string {
   const lines = text.split("\n");
   let content = "";
+  let reasoning = "";
   for (const line of lines) {
     const trimmed = line.trim();
     if (!trimmed.startsWith("data: ")) continue;
@@ -79,11 +80,14 @@ function parseSSEStream(text: string): string {
       if (delta && typeof delta.content === "string") {
         content += delta.content;
       }
+      if (delta && typeof delta.reasoning_content === "string") {
+        reasoning += delta.reasoning_content;
+      }
     } catch {
       // 忽略无法解析的行
     }
   }
-  return content;
+  return content || reasoning;
 }
 
 // 调用大模型生成行程
@@ -95,7 +99,7 @@ async function generateItineraryWithLLM(prompt: string): Promise<string> {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "doubao-seed-2-0-lite-260215",
+      model: "deepseek-v3-2-251201", // 无思考模式，直接输出 content，避免 reasoning_content 占用 token
       messages: [
         {
           role: "system",
@@ -105,6 +109,7 @@ async function generateItineraryWithLLM(prompt: string): Promise<string> {
         { role: "user", content: prompt },
       ],
       temperature: 0.7,
+      max_tokens: 4096,
       stream: true,
     }),
   });
@@ -115,7 +120,11 @@ async function generateItineraryWithLLM(prompt: string): Promise<string> {
   }
 
   const text = await res.text();
-  return parseSSEStream(text);
+  const result = parseSSEStream(text);
+  if (!result || result.trim().length === 0) {
+    throw new Error("LLM returned empty content");
+  }
+  return result;
 }
 
 // 解析大模型返回的 JSON
@@ -428,13 +437,18 @@ export async function POST(request: NextRequest) {
 
     // 1. 先搜索目的地最新实时信息
     const mainCity = travelRequest.destinations[0];
+    console.log("[API] Start generating itinerary for:", mainCity);
     const searchContext = await searchDestinationInfo(mainCity);
+    console.log("[API] Search context length:", searchContext.length);
 
     // 2. 调用大模型生成行程（注入搜索到的实时信息）
     const prompt = buildPrompt(travelRequest, searchContext);
+    console.log("[API] Prompt length:", prompt.length);
     const rawText = await generateItineraryWithLLM(prompt);
+    console.log("[API] LLM raw text length:", rawText.length, "first 200:", rawText.slice(0, 200));
 
     const parsedDays = extractJsonArray(rawText);
+    console.log("[API] Parsed days count:", parsedDays?.length);
 
     if (!parsedDays || !Array.isArray(parsedDays) || parsedDays.length === 0) {
       console.error("LLM response parse failed. Raw:", rawText.slice(0, 500));
