@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Itinerary, TravelRequest, ItineraryDay, ItineraryActivity, HotelInfo, MealInfo, WeatherInfo, BudgetBreakdown, TransportationInfo } from "@/types/travel";
-
 export const dynamic = 'force-dynamic';
 
 // 动态导入 SDK，避免构建时初始化问题
@@ -18,18 +17,10 @@ async function getSearchClient(headers: Headers) {
   return new SearchClient(config, customHeaders);
 }
 
-async function getFetchClient(headers: Headers) {
-  const { FetchClient, Config, HeaderUtils } = await import("coze-coding-dev-sdk");
-  const config = new Config();
-  const customHeaders = HeaderUtils.extractForwardHeaders(headers);
-  return new FetchClient(config, customHeaders);
-}
-
-// 搜索目的地最新实时信息，并抓取前3篇攻略的完整内容
+// 搜索目的地最新实时信息
 async function searchDestinationInfo(city: string, headers: Headers): Promise<string> {
   try {
     const searchClient = await getSearchClient(headers);
-    const fetchClient = await getFetchClient(headers);
 
     const queries = [
       `${city} 旅游攻略 必去景点 推荐 2025`,
@@ -48,7 +39,6 @@ async function searchDestinationInfo(city: string, headers: Headers): Promise<st
     const results = await Promise.all(searchPromises);
 
     const contextParts: string[] = [];
-    const urlsToFetch: { url: string; title: string; label: string }[] = [];
 
     results.forEach((res, idx) => {
       if (!res) return;
@@ -59,54 +49,13 @@ async function searchDestinationInfo(city: string, headers: Headers): Promise<st
         contextParts.push(`概要：${res.summary}`);
       }
 
-      const items = res.web_items?.slice(0, 3) || [];
+      const items = res.web_items?.slice(0, 5) || [];
       items.forEach((item: { title?: string; snippet?: string; link?: string }) => {
         if (item.snippet) {
-          contextParts.push(`- ${item.title || ""}: ${item.snippet.slice(0, 200)}`);
-        }
-        // 收集有URL的结果，准备抓取完整内容
-        if (item.link && item.link.startsWith("http")) {
-          urlsToFetch.push({ url: item.link, title: item.title || "", label });
+          contextParts.push(`- ${item.title || ""}: ${item.snippet.slice(0, 300)}`);
         }
       });
     });
-
-    // 去重URL，选取前3篇抓取完整内容
-    const uniqueUrls = urlsToFetch
-      .filter((v, i, a) => a.findIndex(t => t.url === v.url) === i)
-      .slice(0, 3);
-
-    if (uniqueUrls.length > 0) {
-      contextParts.push("\n=== 详细攻略内容（从网络实时抓取）===");
-
-      const fetchPromises = uniqueUrls.map(async ({ url, title, label }) => {
-        try {
-          const response = await fetchClient.fetch(url);
-          if (response.status_code !== 0) return null;
-
-          const textContent = response.content
-            .filter((item: { type: string; text?: string }) => item.type === "text")
-            .map((item: { type: string; text?: string }) => item.text)
-            .join("\n");
-
-          // 截取前2000字，避免prompt过长
-          const truncated = textContent.slice(0, 2000);
-          if (truncated.length > 100) {
-            return `【${label} - ${title || "攻略"}】\n${truncated}`;
-          }
-          return null;
-        } catch {
-          return null;
-        }
-      });
-
-      const fetchedContents = await Promise.all(fetchPromises);
-      fetchedContents.forEach(content => {
-        if (content) {
-          contextParts.push(content);
-        }
-      });
-    }
 
     return contextParts.join("\n");
   } catch {
