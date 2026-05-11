@@ -109,7 +109,7 @@ async function generateItineraryWithLLM(prompt: string): Promise<string> {
         { role: "user", content: prompt },
       ],
       temperature: 0.7,
-      max_tokens: 4096,
+      max_tokens: 8192,
       stream: true,
     }),
   });
@@ -127,7 +127,7 @@ async function generateItineraryWithLLM(prompt: string): Promise<string> {
   return result;
 }
 
-// 解析大模型返回的 JSON
+// 解析大模型返回的 JSON，带多种容错策略
 function extractJsonArray(text: string): unknown[] | null {
   const codeBlockMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
   if (codeBlockMatch) {
@@ -138,16 +138,40 @@ function extractJsonArray(text: string): unknown[] | null {
     }
   }
 
+  // 策略1：直接查找最外层 [...]
   const start = text.indexOf("[");
   const end = text.lastIndexOf("]");
   if (start !== -1 && end !== -1 && end > start) {
+    const candidate = text.slice(start, end + 1);
     try {
-      return JSON.parse(text.slice(start, end + 1)) as unknown[];
+      return JSON.parse(candidate) as unknown[];
     } catch {
-      // ignore
+      // 策略2：清理常见的非法字符后重试
+      try {
+        const cleaned = candidate
+          .replace(/\r\n/g, "\\n")
+          .replace(/\n/g, "\\n")
+          .replace(/\t/g, "\\t");
+        return JSON.parse(cleaned) as unknown[];
+      } catch {
+        // ignore
+      }
+
+      // 策略3：尝试截断到最后的合法数组结构
+      let lastValidEnd = end;
+      while (lastValidEnd > start) {
+        try {
+          const truncated = candidate.slice(0, lastValidEnd + 1);
+          return JSON.parse(truncated) as unknown[];
+        } catch {
+          lastValidEnd--;
+          if (lastValidEnd < start + 10) break;
+        }
+      }
     }
   }
 
+  // 策略4：直接解析整个文本
   try {
     const parsed = JSON.parse(text.trim());
     if (Array.isArray(parsed)) return parsed;
@@ -221,6 +245,8 @@ function buildPrompt(request: TravelRequest, searchContext: string): string {
 7. 考虑季节特点（${request.departureDate}出发）
 8. 费用估算合理（人民币）
 9. 只返回 JSON 数组，不要任何其他文字、不要 Markdown 代码块标记
+10. description 字段中不要使用英文双引号（"），请使用中文引号（" "）或避免使用引号
+11. 确保 JSON 语法完全合法，所有字符串正确闭合
 
 日期从 ${request.departureDate} 开始，共 ${request.days} 天。`;
 }
@@ -451,9 +477,11 @@ export async function POST(request: NextRequest) {
     console.log("[API] Parsed days count:", parsedDays?.length);
 
     if (!parsedDays || !Array.isArray(parsedDays) || parsedDays.length === 0) {
-      console.error("LLM response parse failed. Raw:", rawText.slice(0, 500));
+      console.error("[API] LLM response parse failed. Full raw text length:", rawText.length);
+      console.error("[API] First 500 chars:", rawText.slice(0, 500));
+      console.error("[API] Last 500 chars:", rawText.slice(-500));
       return NextResponse.json(
-        { error: "AI 行程生成失败，请稍后重试", raw: rawText.slice(0, 200) },
+        { error: "AI 行程生成失败，请稍后重试" },
         { status: 500 }
       );
     }
