@@ -30,11 +30,11 @@ export function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-stone-200/60 bg-white/80 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
-          <MapPin className="h-6 w-6 text-blue-600" />
-          <span className="text-xl font-bold text-gray-900">Tripsign</span>
+          <MapPin className="h-6 w-6 text-amber-700" />
+          <span className="text-xl font-bold text-slate-900 tracking-tight">Tripsign</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -42,7 +42,7 @@ export function Navbar() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
+              className="text-sm font-medium text-slate-600 hover:text-amber-700 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-amber-700 after:transition-all after:duration-300 after:-mb-1"
             >
               {item.name}
             </Link>
@@ -61,7 +61,7 @@ export function Navbar() {
                 <Button variant="ghost" size="sm" className="gap-2">
                   <Avatar className="h-8 w-8">
                     <AvatarImage src={user.avatar} alt={user.nickname} />
-                    <AvatarFallback className="bg-blue-500 text-white text-sm">
+                    <AvatarFallback className="bg-amber-700 text-white text-sm">
                       {user.nickname.slice(0, 2)}
                     </AvatarFallback>
                   </Avatar>
@@ -72,7 +72,7 @@ export function Navbar() {
                 <DropdownMenuLabel>
                   <div className="flex flex-col">
                     <span className="font-medium">{user.nickname}</span>
-                    <span className="text-xs text-gray-500">{MEMBERSHIP_LEVELS[user.membershipLevel].name}</span>
+                    <span className="text-xs text-slate-500">{MEMBERSHIP_LEVELS[user.membershipLevel].name}</span>
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
@@ -120,8 +120,8 @@ export function Navbar() {
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between py-4">
                 <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
-                  <MapPin className="h-6 w-6 text-blue-600" />
-                  <span className="text-xl font-bold text-gray-900">Tripsign</span>
+                  <MapPin className="h-6 w-6 text-amber-700" />
+                  <span className="text-xl font-bold text-slate-900">Tripsign</span>
                 </Link>
                 <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
                   <X className="h-5 w-5" />
@@ -132,7 +132,7 @@ export function Navbar() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="block text-lg font-medium text-gray-900 hover:text-blue-600 transition-colors"
+                    className="block text-lg font-medium text-slate-900 hover:text-amber-700 transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     {item.name}
@@ -142,16 +142,16 @@ export function Navbar() {
               <div className="space-y-4 pb-4">
                 {user ? (
                   <>
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <div className="flex items-center gap-3 p-3 bg-stone-50 rounded-lg">
                       <Avatar className="h-10 w-10">
                         <AvatarImage src={user.avatar} alt={user.nickname} />
-                        <AvatarFallback className="bg-blue-500 text-white">
+                        <AvatarFallback className="bg-amber-700 text-white">
                           {user.nickname.slice(0, 2)}
                         </AvatarFallback>
                       </Avatar>
                       <div>
                         <div className="font-medium">{user.nickname}</div>
-                        <div className="text-xs text-gray-500">{MEMBERSHIP_LEVELS[user.membershipLevel].name}</div>
+                        <div className="text-xs text-slate-500">{MEMBERSHIP_LEVELS[user.membershipLevel].name}</div>
                       </div>
                     </div>
                     <Button className="w-full" asChild>

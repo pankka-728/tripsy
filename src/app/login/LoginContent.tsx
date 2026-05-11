@@ -92,13 +92,13 @@ export default function LoginContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
+    <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white py-12">
       <div className="container mx-auto px-4">
         <div className="max-w-md mx-auto">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">登录 Tripsign</h1>
-            <p className="text-gray-600">登录后享受更多会员专属服务</p>
+            <h1 className="text-3xl font-bold text-slate-900 mb-2">登录 Tripsign</h1>
+            <p className="text-slate-600">登录后享受更多会员专属服务</p>
           </div>
 
           {/* Login Card */}
@@ -123,10 +123,10 @@ export default function LoginContent() {
                 {/* 手机号登录 */}
                 <TabsContent value="phone" className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-700">手机号</label>
+                    <label className="text-sm font-medium text-slate-700">手机号</label>
                     <div className="flex gap-2">
                       <div className="flex-1 relative">
-                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
                         <Input
                           type="tel"
                           placeholder="请输入手机号"
@@ -140,10 +140,10 @@ export default function LoginContent() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-700">验证码</label>
+                    <label className="text-sm font-medium text-slate-700">验证码</label>
                     <div className="flex gap-2">
                       <div className="flex-1 relative">
-                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
                         <Input
                           type="text"
                           placeholder="请输入验证码"
@@ -165,7 +165,7 @@ export default function LoginContent() {
                   </div>
 
                   <Button 
-                    className="w-full bg-blue-600 hover:bg-blue-700"
+                    className="w-full bg-amber-700 hover:bg-amber-800"
                     onClick={handlePhoneLogin}
                     disabled={loading}
                   >
@@ -177,9 +177,9 @@ export default function LoginContent() {
                 {/* 邮箱登录 */}
                 <TabsContent value="email" className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-700">邮箱</label>
+                    <label className="text-sm font-medium text-slate-700">邮箱</label>
                     <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                      <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
                       <Input
                         type="email"
                         placeholder="请输入邮箱"
@@ -191,9 +191,9 @@ export default function LoginContent() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-700">密码</label>
+                    <label className="text-sm font-medium text-slate-700">密码</label>
                     <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                      <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
                       <Input
                         type={showPassword ? "text" : "password"}
                         placeholder="请输入密码"
@@ -204,7 +204,7 @@ export default function LoginContent() {
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600"
                       >
                         {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                       </button>
@@ -212,7 +212,7 @@ export default function LoginContent() {
                   </div>
 
                   <Button 
-                    className="w-full bg-blue-600 hover:bg-blue-700"
+                    className="w-full bg-amber-700 hover:bg-amber-800"
                     onClick={handleEmailLogin}
                     disabled={loading}
                   >
@@ -227,8 +227,8 @@ export default function LoginContent() {
                     <div className="w-48 h-48 mx-auto bg-green-50 rounded-lg flex items-center justify-center mb-4">
                       <MessageCircle className="w-24 h-24 text-green-500" />
                     </div>
-                    <p className="text-gray-600 mb-4">使用微信扫一扫登录</p>
-                    <p className="text-sm text-gray-500">扫码后将自动登录 Tripsign</p>
+                    <p className="text-slate-600 mb-4">使用微信扫一扫登录</p>
+                    <p className="text-sm text-slate-500">扫码后将自动登录 Tripsign</p>
                   </div>
                   
                   <Button 
@@ -245,10 +245,10 @@ export default function LoginContent() {
               {/* Divider */}
               <div className="relative my-6">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-200"></div>
+                  <div className="w-full border-t border-stone-200"></div>
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">其他登录方式</span>
+                  <span className="px-2 bg-white text-slate-500">其他登录方式</span>
                 </div>
               </div>
 
@@ -259,7 +259,7 @@ export default function LoginContent() {
                   <span className="text-xs">微信</span>
                 </Button>
                 <Button variant="secondary" className="flex flex-col items-center py-4" onClick={() => setActiveTab('phone')}>
-                  <Phone className="h-6 w-6 text-blue-600 mb-1" />
+                  <Phone className="h-6 w-6 text-amber-700 mb-1" />
                   <span className="text-xs">手机</span>
                 </Button>
                 <Button variant="secondary" className="flex flex-col items-center py-4" onClick={() => setActiveTab('email')}>
@@ -270,8 +270,8 @@ export default function LoginContent() {
 
               {/* Register Link */}
               <div className="mt-6 text-center">
-                <span className="text-gray-600">还没有账号？</span>
-                <button className="text-blue-600 hover:text-blue-700 font-medium ml-1">
+                <span className="text-slate-600">还没有账号？</span>
+                <button className="text-amber-700 hover:text-amber-800 font-medium ml-1">
                   立即注册
                 </button>
               </div>
@@ -283,29 +283,29 @@ export default function LoginContent() {
             <div className="flex items-start gap-3">
               <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-medium text-gray-900">专业定制</h4>
-                <p className="text-sm text-gray-600">1对1专属行程规划</p>
+                <h4 className="font-medium text-slate-900">专业定制</h4>
+                <p className="text-sm text-slate-600">1对1专属行程规划</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-medium text-gray-900">积分奖励</h4>
-                <p className="text-sm text-gray-600">定制累积积分兑换</p>
+                <h4 className="font-medium text-slate-900">积分奖励</h4>
+                <p className="text-sm text-slate-600">定制累积积分兑换</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-medium text-gray-900">行程管理</h4>
-                <p className="text-sm text-gray-600">历史定制随时查看</p>
+                <h4 className="font-medium text-slate-900">行程管理</h4>
+                <p className="text-sm text-slate-600">历史定制随时查看</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-medium text-gray-900">专属顾问</h4>
-                <p className="text-sm text-gray-600">1对1贴心服务</p>
+                <h4 className="font-medium text-slate-900">专属顾问</h4>
+                <p className="text-sm text-slate-600">1对1贴心服务</p>
               </div>
             </div>
           </div>

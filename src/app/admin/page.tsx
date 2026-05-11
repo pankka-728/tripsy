@@ -30,11 +30,11 @@ function StatCard({ title, value, icon: Icon, trend, trendValue, href }: StatCar
     <CardWrapper href={href || '#'} className={href ? 'block' : ''}>
       <Card className={href ? 'cursor-pointer hover:shadow-md transition-shadow' : ''}>
         <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-sm font-medium text-gray-500">{title}</CardTitle>
-          <Icon className="w-4 h-4 text-gray-400" />
+          <CardTitle className="text-sm font-medium text-slate-500">{title}</CardTitle>
+          <Icon className="w-4 h-4 text-slate-400" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold text-gray-900">{value}</div>
+          <div className="text-2xl font-bold text-slate-900">{value}</div>
           {trend && trendValue && (
             <div className={`flex items-center gap-1 text-sm ${
               trend === 'up' ? 'text-green-600' : 'text-red-600'
@@ -57,8 +57,8 @@ export default function AdminDashboard() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">仪表盘</h1>
-            <p className="text-gray-500">欢迎回来，这是您的业务概览</p>
+            <h1 className="text-2xl font-bold text-slate-900">仪表盘</h1>
+            <p className="text-slate-500">欢迎回来，这是您的业务概览</p>
           </div>
           <div className="flex gap-3">
             <Button variant="outline">导出报告</Button>
@@ -112,17 +112,17 @@ export default function AdminDashboard() {
               <div className="space-y-4">
                 {stats.popularDestinations.map((dest, index) => (
                   <div key={dest.name} className="flex items-center gap-4">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-medium">
+                    <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-medium">
                       {index + 1}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="font-medium text-gray-900">{dest.name}</span>
-                        <span className="text-sm text-gray-500">{dest.count} 次</span>
+                        <span className="font-medium text-slate-900">{dest.name}</span>
+                        <span className="text-sm text-slate-500">{dest.count} 次</span>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="w-full bg-stone-200 rounded-full h-2">
                         <div 
-                          className="bg-blue-600 h-2 rounded-full transition-all"
+                          className="bg-amber-700 h-2 rounded-full transition-all"
                           style={{ width: `${(dest.count / stats.popularDestinations[0].count) * 100}%` }}
                         />
                       </div>
@@ -142,11 +142,11 @@ export default function AdminDashboard() {
               <div className="space-y-4">
                 {stats.recentActivities.map((activity) => (
                   <div key={activity.id} className="flex gap-3">
-                    <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
+                    <div className="w-2 h-2 mt-2 rounded-full bg-amber-600 flex-shrink-0" />
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900">{activity.title}</p>
-                      <p className="text-sm text-gray-500 truncate">{activity.description}</p>
-                      <p className="text-xs text-gray-400 flex items-center gap-1 mt-1">
+                      <p className="text-sm font-medium text-slate-900">{activity.title}</p>
+                      <p className="text-sm text-slate-500 truncate">{activity.description}</p>
+                      <p className="text-xs text-slate-400 flex items-center gap-1 mt-1">
                         <Clock className="w-3 h-3" />
                         {activity.time.toLocaleString('zh-CN')}
                       </p>
@@ -168,8 +168,8 @@ export default function AdminDashboard() {
                     <span className="text-2xl font-bold text-yellow-600">{stats.pendingItineraries}</span>
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">待处理行程</p>
-                    <p className="text-sm text-gray-500">点击查看</p>
+                    <p className="font-medium text-slate-900">待处理行程</p>
+                    <p className="text-sm text-slate-500">点击查看</p>
                   </div>
                 </div>
               </CardContent>
@@ -179,12 +179,12 @@ export default function AdminDashboard() {
             <Card className="cursor-pointer hover:shadow-md transition-all hover:-translate-y-1">
               <CardContent className="p-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                    <span className="text-2xl font-bold text-blue-600">{stats.pendingOrders}</span>
+                  <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
+                    <span className="text-2xl font-bold text-amber-700">{stats.pendingOrders}</span>
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">待处理订单</p>
-                    <p className="text-sm text-gray-500">点击查看</p>
+                    <p className="font-medium text-slate-900">待处理订单</p>
+                    <p className="text-sm text-slate-500">点击查看</p>
                   </div>
                 </div>
               </CardContent>
@@ -198,8 +198,8 @@ export default function AdminDashboard() {
                     <Plane className="w-6 h-6 text-green-600" />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">新建行程</p>
-                    <p className="text-sm text-gray-500">快速创建</p>
+                    <p className="font-medium text-slate-900">新建行程</p>
+                    <p className="text-sm text-slate-500">快速创建</p>
                   </div>
                 </div>
               </CardContent>
@@ -213,8 +213,8 @@ export default function AdminDashboard() {
                     <TrendingUp className="w-6 h-6 text-purple-600" />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">数据分析</p>
-                    <p className="text-sm text-gray-500">查看详情</p>
+                    <p className="font-medium text-slate-900">数据分析</p>
+                    <p className="text-sm text-slate-500">查看详情</p>
                   </div>
                 </div>
               </CardContent>

@@ -495,7 +495,7 @@ const generateDestinations = (): DestinationAdmin[] => {
   // 重要城市专属当地风景图片（精选重要城市，确保每个都有真正不同的图片）
   const specialCityImages: Record<string, string> = {
     // 中国核心城市（精选最重要的，每个都有真正不同的图片）
-    '北京': 'https://images.unsplash.com/photo-1508804185872-d0def16c5c67?w=800&h=600&fit=crop', // 北京故宫/天安门
+    '北京': 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop', // 北京故宫/天安门
     '上海': 'https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?w=800&h=600&fit=crop', // 上海外滩
     '成都': 'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?w=800&h=600&fit=crop', // 成都熊猫
     '杭州': 'https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=800&h=600&fit=crop', // 杭州西湖
@@ -516,7 +516,7 @@ const generateDestinations = (): DestinationAdmin[] => {
     '武汉': 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&h=600&fit=crop', // 武汉黄鹤楼
     '长沙': 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800&h=600&fit=crop', // 长沙橘子洲
     '昆明': 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=600&fit=crop', // 昆明春城
-    '大理': 'https://images.unsplash.com/photo-1501785888041-af3ef281b399?w=800&h=600&fit=crop', // 大理古城
+    '大理': 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=600&fit=crop', // 大理古城
     '拉萨': 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=600&fit=crop', // 拉萨布达拉宫
   };
 
@@ -530,9 +530,9 @@ const generateDestinations = (): DestinationAdmin[] => {
     'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&h=600&fit=crop', // 夜景1
     'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800&h=600&fit=crop', // 森林1
     'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=600&fit=crop', // 雪山1
-    'https://images.unsplash.com/photo-1501785888041-af3ef281b399?w=800&h=600&fit=crop', // 城市天际线1
+    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=600&fit=crop', // 城市天际线1
     'https://images.unsplash.com/photo-1504598318550-17eba1008a68?w=800&h=600&fit=crop', // 日落1
-    'https://images.unsplash.com/photo-1519817650390-64a93db51571?w=800&h=600&fit=crop', // 城市广场
+    'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop', // 城市广场
     'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop', // 自然风光
     'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=600&fit=crop', // 森林小径
     'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&h=600&fit=crop', // 乡村风光

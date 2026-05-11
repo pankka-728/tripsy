@@ -10,7 +10,7 @@ interface AdminHeaderProps {
 
 export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
   return (
-    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6">
+    <header className="h-16 bg-white border-b border-stone-200 flex items-center justify-between px-6">
       <div className="flex items-center gap-4">
         <Button
           variant="ghost"
@@ -21,10 +21,10 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
           <Menu className="w-5 h-5" />
         </Button>
         <div className="relative w-64">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
           <Input
             placeholder="搜索..."
-            className="pl-10 bg-gray-50 border-gray-200"
+            className="pl-10 bg-stone-50 border-stone-200"
           />
         </div>
       </div>

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: '%s | Tripsign',
   },
   description:
-    'Tripsy是您的全球私人定制旅行专家，AI旅游规划师为您量身打造完美行程，智能报价，无限修改，生成精美PDF游记。',
+    'Tripsign是您的全球私人定制旅行专家，AI旅游规划师为您量身打造完美行程，智能报价，无限修改，生成精美PDF游记。',
   keywords: [
     '旅游定制',
     '旅行规划',
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     '私人定制',
     '全球旅游',
     '行程规划',
-    'Tripsy',
+    'Tripsign',
     '旅游攻略',
   ],
-  authors: [{ name: 'Tripsy Team' }],
-  generator: 'Tripsy',
+  authors: [{ name: 'Tripsign Team' }],
+  generator: 'Tripsign',
   openGraph: {
-    title: 'Tripsy - 您的私人旅行规划师',
+    title: 'Tripsign - 您的私人旅行规划师',
     description:
       'AI旅游规划师为您量身定制全球旅行行程，智能报价，无限次修改，生成精美PDF游记。',
     locale: 'zh_CN',

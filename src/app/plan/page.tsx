@@ -104,11 +104,11 @@ export default function PlanPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
+    <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">定制您的完美旅程</h1>
-          <p className="text-lg text-gray-600">填写以下信息，AI旅游规划师将为您量身打造行程</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">定制您的完美旅程</h1>
+          <p className="text-lg text-slate-600">填写以下信息，AI旅游规划师将为您量身打造行程</p>
         </div>
 
         <div className="mb-12">
@@ -120,18 +120,18 @@ export default function PlanPage() {
                     s < step 
                       ? "bg-green-500 text-white" 
                       : s === step 
-                        ? "bg-blue-600 text-white animate-pulse" 
-                        : "bg-gray-200 text-gray-500"
+                        ? "bg-amber-700 text-white animate-pulse" 
+                        : "bg-stone-200 text-stone-500"
                   }`}>
                     {s < step ? <CheckCircle className="h-5 w-5" /> : s}
                   </div>
-                  <span className={`text-sm mt-2 ${s === step ? "text-blue-600 font-medium" : "text-gray-500"}`}>
+                  <span className={`text-sm mt-2 ${s === step ? "text-amber-700 font-medium" : "text-stone-500"}`}>
                     {s === 1 ? "基本信息" : s === 2 ? "目的地" : s === 3 ? "预算偏好" : "特殊要求"}
                   </span>
                 </div>
                 {s < 4 && (
                   <div className={`flex-1 h-1 w-16 md:w-24 mx-2 mt-5 ${
-                    s < step ? "bg-green-500" : "bg-gray-200"
+                    s < step ? "bg-green-500" : "bg-stone-200"
                   }`}></div>
                 )}
               </div>
@@ -144,8 +144,8 @@ export default function PlanPage() {
             {step === 1 && (
               <div className="space-y-8">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                    <CalendarIcon className="h-6 w-6 text-blue-600" />
+                  <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                    <CalendarIcon className="h-6 w-6 text-amber-700" />
                     基本信息
                   </h2>
                   
@@ -193,11 +193,11 @@ export default function PlanPage() {
                         <RadioGroupItem value={type.value} id={type.value} className="peer sr-only" />
                         <Label 
                           htmlFor={type.value} 
-                          className="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer peer-data-[state=checked]:border-blue-600 peer-data-[state=checked]:bg-blue-50 hover:bg-gray-50 transition-all"
+                          className="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer peer-data-[state=checked]:border-amber-700 peer-data-[state=checked]:bg-amber-50 hover:bg-stone-50 transition-all"
                         >
                           <span className="text-3xl mb-2">{type.icon}</span>
-                          <span className="font-semibold text-gray-900">{type.label}</span>
-                          <span className="text-xs text-gray-500 text-center">{type.description}</span>
+                          <span className="font-semibold text-slate-900">{type.label}</span>
+                          <span className="text-xs text-slate-500 text-center">{type.description}</span>
                         </Label>
                       </div>
                     ))}
@@ -216,11 +216,11 @@ export default function PlanPage() {
                         <RadioGroupItem value={type.value} id={`travel-type-${type.value}`} className="peer sr-only" />
                         <Label 
                           htmlFor={`travel-type-${type.value}`}
-                          className="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer peer-data-[state=checked]:border-blue-600 peer-data-[state=checked]:bg-blue-50 hover:bg-gray-50 transition-all w-full"
+                          className="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer peer-data-[state=checked]:border-amber-700 peer-data-[state=checked]:bg-amber-50 hover:bg-stone-50 transition-all w-full"
                         >
                           <span className="text-3xl mb-2">{type.icon}</span>
-                          <span className="font-medium text-gray-900 text-center">{type.label}</span>
-                          <span className="text-xs text-gray-500">{type.sublabel}</span>
+                          <span className="font-medium text-slate-900 text-center">{type.label}</span>
+                          <span className="text-xs text-slate-500">{type.sublabel}</span>
                         </Label>
                       </div>
                     ))}
@@ -280,11 +280,11 @@ export default function PlanPage() {
             {step === 2 && (
               <div className="space-y-8">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                    <MapPin className="h-6 w-6 text-blue-600" />
+                  <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                    <MapPin className="h-6 w-6 text-amber-700" />
                     目的地
                   </h2>
-                  <p className="text-gray-600 mb-6">请输入您想去的国家或城市（支持多目的地）</p>
+                  <p className="text-slate-600 mb-6">请输入您想去的国家或城市（支持多目的地）</p>
                   
                   <div className="space-y-4">
                     {destinations.map((dest, index) => (
@@ -327,8 +327,8 @@ export default function PlanPage() {
             {step === 3 && (
               <div className="space-y-8">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                    <DollarSign className="h-6 w-6 text-blue-600" />
+                  <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                    <DollarSign className="h-6 w-6 text-amber-700" />
                     预算范围
                   </h2>
                   
@@ -376,7 +376,7 @@ export default function PlanPage() {
                             />
                             <Label
                               htmlFor={`budget-${range.min}`}
-                              className="flex-1 p-3 border-2 rounded-lg cursor-pointer peer-data-[state=checked]:border-blue-600 peer-data-[state=checked]:bg-blue-50 hover:bg-gray-50 transition-all block"
+                              className="flex-1 p-3 border-2 rounded-lg cursor-pointer peer-data-[state=checked]:border-amber-700 peer-data-[state=checked]:bg-amber-50 hover:bg-stone-50 transition-all block"
                             >
                               {range.label}
                             </Label>
@@ -388,11 +388,11 @@ export default function PlanPage() {
                 </div>
 
                 <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
-                    <Sparkles className="h-5 w-5 text-blue-600" />
+                  <h3 className="text-xl font-semibold text-slate-900 flex items-center gap-2">
+                    <Sparkles className="h-5 w-5 text-amber-700" />
                     旅行偏好
                   </h3>
-                  <p className="text-gray-600">请选择您感兴趣的旅行方式（可多选）</p>
+                  <p className="text-slate-600">请选择您感兴趣的旅行方式（可多选）</p>
                   
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {PREFERENCES.map((pref) => (
@@ -425,8 +425,8 @@ export default function PlanPage() {
             {step === 4 && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">特殊要求</h2>
-                  <p className="text-gray-600 mb-6">
+                  <h2 className="text-2xl font-bold text-slate-900 mb-6">特殊要求</h2>
+                  <p className="text-slate-600 mb-6">
                     请告诉我们您的特殊需求，如饮食禁忌、过敏信息、住宿偏好、交通偏好等，我们会在规划行程时特别注意。
                   </p>
                   
@@ -442,12 +442,12 @@ export default function PlanPage() {
                   </div>
                 </div>
 
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                  <h3 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
+                  <h3 className="font-semibold text-amber-900 mb-2 flex items-center gap-2">
                     <CheckCircle className="h-5 w-5" />
                     信息确认
                   </h3>
-                  <p className="text-blue-800 text-sm">
+                  <p className="text-amber-800 text-sm">
                     请仔细核对您填写的信息，点击下方按钮后，AI旅游规划师将为您生成定制行程。
                     行程生成后您还可以无限次修改，直到满意为止。
                   </p>

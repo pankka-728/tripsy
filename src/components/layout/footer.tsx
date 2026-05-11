@@ -3,25 +3,25 @@ import { MapPin, Mail, Phone, Instagram, Twitter, Facebook } from "lucide-react"
 
 export function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-slate-900 text-stone-400">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <MapPin className="h-6 w-6 text-blue-400" />
-              <span className="text-xl font-bold text-white">Tripsign</span>
+              <MapPin className="h-6 w-6 text-amber-500" />
+              <span className="text-xl font-bold text-white tracking-tight">Tripsign</span>
             </div>
-            <p className="text-sm text-gray-400 mb-4">
+            <p className="text-sm text-slate-400 mb-4">
               您的私人旅行规划师，让每一次旅途都充满惊喜。
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-slate-400 hover:text-white transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-slate-400 hover:text-white transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-slate-400 hover:text-white transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
             </div>
@@ -51,18 +51,18 @@ export function Footer() {
             <h3 className="text-white font-semibold mb-4">联系我们</h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-blue-400" />
+                <Mail className="h-4 w-4 text-amber-500" />
                 <span>contact@tripsy.com</span>
               </li>
               <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-blue-400" />
+                <Phone className="h-4 w-4 text-amber-500" />
                 <span>+86 400-123-4567</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-gray-500 text-center">
+        <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-slate-500 text-center">
           <p>© 2024 Tripsign. 保留所有权利。</p>
         </div>
       </div>

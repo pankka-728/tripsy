@@ -10,14 +10,14 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="w-64 bg-white border-r border-gray-200 min-h-screen flex flex-col">
+    <div className="w-64 bg-white border-r border-stone-200 min-h-screen flex flex-col">
       {/* Logo */}
-      <div className="p-6 border-b border-gray-200">
+      <div className="p-6 border-b border-stone-200">
         <Link href="/admin" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-gradient-to-r from-slate-700 to-slate-600 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-sm">T</span>
           </div>
-          <span className="text-xl font-bold text-gray-900">Tripsign Admin</span>
+          <span className="text-xl font-bold text-slate-900">Tripsign Admin</span>
         </Link>
       </div>
 
@@ -34,8 +34,8 @@ export function AdminSidebar() {
                 className={cn(
                   'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors',
                   isActive
-                    ? 'bg-blue-50 text-blue-600'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    ? 'bg-amber-50 text-amber-700'
+                    : 'text-slate-600 hover:bg-stone-50 hover:text-slate-900'
                 )}
               >
                 <item.icon className="w-5 h-5" />
@@ -54,8 +54,8 @@ export function AdminSidebar() {
                         className={cn(
                           'flex items-center gap-3 px-4 py-2 rounded-lg text-sm transition-colors',
                           isChildActive
-                            ? 'bg-blue-100 text-blue-700'
-                            : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'
+                            ? 'bg-amber-100 text-amber-700'
+                            : 'text-slate-500 hover:bg-stone-50 hover:text-slate-700'
                         )}
                       >
                         <child.icon className="w-4 h-4" />
@@ -71,17 +71,17 @@ export function AdminSidebar() {
       </nav>
 
       {/* User Section */}
-      <div className="p-4 border-t border-gray-200">
+      <div className="p-4 border-t border-stone-200">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+          <div className="w-10 h-10 bg-gradient-to-r from-slate-600 to-pink-500 rounded-full flex items-center justify-center">
             <span className="text-white font-medium">A</span>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate">管理员</p>
-            <p className="text-xs text-gray-500 truncate">admin@tripsy.com</p>
+            <p className="text-sm font-medium text-slate-900 truncate">管理员</p>
+            <p className="text-xs text-slate-500 truncate">admin@tripsy.com</p>
           </div>
         </div>
-        <button className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+        <button className="flex items-center gap-2 w-full px-4 py-2 text-sm text-slate-600 hover:bg-stone-50 rounded-lg transition-colors">
           <LogOut className="w-4 h-4" />
           <span>退出登录</span>
         </button>

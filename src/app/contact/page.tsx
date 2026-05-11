@@ -42,25 +42,25 @@ export default function ContactPage() {
 
   const contactInfo = [
     {
-      icon: <Mail className="h-6 w-6 text-blue-600" />,
+      icon: <Mail className="h-6 w-6 text-amber-700" />,
       title: "电子邮件",
       content: "contact@tripsy.com",
       subcontent: "24小时内回复"
     },
     {
-      icon: <Phone className="h-6 w-6 text-blue-600" />,
+      icon: <Phone className="h-6 w-6 text-amber-700" />,
       title: "联系电话",
       content: "400-123-4567",
       subcontent: "工作日 9:00-18:00"
     },
     {
-      icon: <MapPin className="h-6 w-6 text-blue-600" />,
+      icon: <MapPin className="h-6 w-6 text-amber-700" />,
       title: "公司地址",
       content: "北京市朝阳区建国路88号",
       subcontent: "欢迎来访"
     },
     {
-      icon: <Clock className="h-6 w-6 text-blue-600" />,
+      icon: <Clock className="h-6 w-6 text-amber-700" />,
       title: "工作时间",
       content: "周一至周五 9:00-18:00",
       subcontent: "周末在线咨询"
@@ -69,14 +69,14 @@ export default function ContactPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex items-center justify-center py-20">
+      <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white flex items-center justify-center py-20">
         <Card className="border-0 shadow-lg max-w-md w-full mx-4">
           <CardContent className="p-8 text-center">
             <div className="w-20 h-20 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-6">
               <MessageSquare className="h-10 w-10" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">消息已发送！</h2>
-            <p className="text-gray-600 mb-6">
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">消息已发送！</h2>
+            <p className="text-slate-600 mb-6">
               感谢您的留言，我们会在24小时内与您联系。
             </p>
             <Button onClick={() => setSubmitted(false)}>
@@ -89,12 +89,12 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
+    <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white py-12">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">联系我们</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">联系我们</h1>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             有任何问题或建议？我们随时为您服务
           </p>
         </div>
@@ -106,13 +106,13 @@ export default function ContactPage() {
               <Card key={index} className="border-0 shadow-lg">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="bg-blue-50 rounded-full p-3">
+                    <div className="bg-amber-50 rounded-full p-3">
                       {info.icon}
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">{info.title}</h3>
-                      <p className="text-gray-900 font-medium">{info.content}</p>
-                      <p className="text-sm text-gray-500">{info.subcontent}</p>
+                      <h3 className="font-semibold text-slate-900 mb-1">{info.title}</h3>
+                      <p className="text-slate-900 font-medium">{info.content}</p>
+                      <p className="text-sm text-slate-500">{info.subcontent}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -122,15 +122,15 @@ export default function ContactPage() {
             {/* Social Media */}
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-900 mb-4">关注我们</h3>
+                <h3 className="font-semibold text-slate-900 mb-4">关注我们</h3>
                 <div className="flex gap-4">
                   <a href="#" className="w-12 h-12 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center hover:bg-pink-200 transition-colors">
                     <Instagram className="h-5 w-5" />
                   </a>
-                  <a href="#" className="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center hover:bg-blue-200 transition-colors">
+                  <a href="#" className="w-12 h-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center hover:bg-amber-200 transition-colors">
                     <Twitter className="h-5 w-5" />
                   </a>
-                  <a href="#" className="w-12 h-12 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center hover:bg-blue-200 transition-colors">
+                  <a href="#" className="w-12 h-12 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center hover:bg-amber-200 transition-colors">
                     <Facebook className="h-5 w-5" />
                   </a>
                 </div>
@@ -142,7 +142,7 @@ export default function ContactPage() {
           <div className="lg:col-span-2">
             <Card className="border-0 shadow-lg">
               <CardContent className="p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">发送消息</h2>
+                <h2 className="text-2xl font-bold text-slate-900 mb-6">发送消息</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
@@ -237,15 +237,15 @@ export default function ContactPage() {
             {/* FAQ Preview */}
             <Card className="border-0 shadow-lg mt-6">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-900 mb-4">常见问题</h3>
+                <h3 className="font-semibold text-slate-900 mb-4">常见问题</h3>
                 <div className="space-y-4">
                   <div className="pb-4 border-b">
-                    <h4 className="font-medium text-gray-900 mb-1">如何取消或修改行程？</h4>
-                    <p className="text-gray-600 text-sm">您可以在行程页面随时修改行程，AI会实时更新。如果需要取消，请联系客服。</p>
+                    <h4 className="font-medium text-slate-900 mb-1">如何取消或修改行程？</h4>
+                    <p className="text-slate-600 text-sm">您可以在行程页面随时修改行程，AI会实时更新。如果需要取消，请联系客服。</p>
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900 mb-1">支付方式有哪些？</h4>
-                    <p className="text-gray-600 text-sm">我们支持支付宝、微信支付、信用卡等多种支付方式。</p>
+                    <h4 className="font-medium text-slate-900 mb-1">支付方式有哪些？</h4>
+                    <p className="text-slate-600 text-sm">我们支持支付宝、微信支付、信用卡等多种支付方式。</p>
                   </div>
                 </div>
                 <Button variant="secondary" className="mt-4" asChild>

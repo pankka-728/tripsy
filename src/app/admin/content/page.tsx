@@ -14,8 +14,8 @@ export default function AdminContent() {
       icon: MapPin,
       href: '/admin/content/destinations',
       count: 12,
-      color: 'text-blue-600',
-      bg: 'bg-blue-100',
+      color: 'text-amber-700',
+      bg: 'bg-amber-100',
     },
     {
       title: '景点管理',
@@ -51,8 +51,8 @@ export default function AdminContent() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">内容管理</h1>
-            <p className="text-gray-500">管理网站的所有内容资源</p>
+            <h1 className="text-2xl font-bold text-slate-900">内容管理</h1>
+            <p className="text-slate-500">管理网站的所有内容资源</p>
           </div>
         </div>
 
@@ -68,11 +68,11 @@ export default function AdminContent() {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
-                        <h3 className="text-lg font-semibold text-gray-900">{type.title}</h3>
-                        <span className="text-2xl font-bold text-gray-400">{type.count}</span>
+                        <h3 className="text-lg font-semibold text-slate-900">{type.title}</h3>
+                        <span className="text-2xl font-bold text-slate-400">{type.count}</span>
                       </div>
-                      <p className="text-gray-500 mt-1">{type.description}</p>
-                      <Button variant="ghost" className="mt-3 -ml-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50">
+                      <p className="text-slate-500 mt-1">{type.description}</p>
+                      <Button variant="ghost" className="mt-3 -ml-2 text-amber-700 hover:text-amber-800 hover:bg-amber-50">
                         管理
                         <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -95,12 +95,12 @@ export default function AdminContent() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Button className="justify-start h-auto py-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Plus className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+                    <Plus className="w-5 h-5 text-amber-700" />
                   </div>
                   <div className="text-left">
                     <p className="font-medium">添加新目的地</p>
-                    <p className="text-xs text-gray-500">快速创建新的热门目的地</p>
+                    <p className="text-xs text-slate-500">快速创建新的热门目的地</p>
                   </div>
                 </div>
               </Button>
@@ -111,7 +111,7 @@ export default function AdminContent() {
                   </div>
                   <div className="text-left">
                     <p className="font-medium">编辑首页内容</p>
-                    <p className="text-xs text-gray-500">修改Banner和推荐内容</p>
+                    <p className="text-xs text-slate-500">修改Banner和推荐内容</p>
                   </div>
                 </div>
               </Button>
@@ -122,7 +122,7 @@ export default function AdminContent() {
                   </div>
                   <div className="text-left">
                     <p className="font-medium">更新FAQ</p>
-                    <p className="text-xs text-gray-500">添加或修改常见问题</p>
+                    <p className="text-xs text-slate-500">添加或修改常见问题</p>
                   </div>
                 </div>
               </Button>

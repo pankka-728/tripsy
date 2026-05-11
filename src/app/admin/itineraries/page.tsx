@@ -69,8 +69,8 @@ export default function AdminItineraries() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">行程管理</h1>
-            <p className="text-gray-500">管理用户提交的行程需求</p>
+            <h1 className="text-2xl font-bold text-slate-900">行程管理</h1>
+            <p className="text-slate-500">管理用户提交的行程需求</p>
           </div>
           <Button>
             <Plane className="w-4 h-4 mr-2" />
@@ -82,10 +82,10 @@ export default function AdminItineraries() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-500">总行程</CardTitle>
+              <CardTitle className="text-sm font-medium text-slate-500">总行程</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">{itineraries.length}</div>
+              <div className="text-2xl font-bold text-slate-900">{itineraries.length}</div>
             </CardContent>
           </Card>
           <Card>
@@ -100,10 +100,10 @@ export default function AdminItineraries() {
           </Card>
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-blue-600">规划中</CardTitle>
+              <CardTitle className="text-sm font-medium text-amber-700">规划中</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-blue-600">
+              <div className="text-2xl font-bold text-amber-700">
                 {itineraries.filter(i => i.status === 'planning').length}
               </div>
             </CardContent>
@@ -123,7 +123,7 @@ export default function AdminItineraries() {
         {/* Filters */}
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
             <Input
               placeholder="搜索用户、目的地..."
               value={searchQuery}
@@ -135,7 +135,7 @@ export default function AdminItineraries() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600"
             >
               <option value="all">全部状态</option>
               {Object.entries(ITINERARY_STATUS).map(([key, value]) => (
@@ -154,29 +154,29 @@ export default function AdminItineraries() {
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50 border-b border-gray-200">
+                <thead className="bg-stone-50 border-b border-stone-200">
                   <tr>
-                    <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">用户</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">目的地</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">日期</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">人数</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">预算</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">状态</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">提交时间</th>
-                    <th className="text-right py-3 px-4 font-medium text-gray-500 text-sm">操作</th>
+                    <th className="text-left py-3 px-4 font-medium text-slate-500 text-sm">用户</th>
+                    <th className="text-left py-3 px-4 font-medium text-slate-500 text-sm">目的地</th>
+                    <th className="text-left py-3 px-4 font-medium text-slate-500 text-sm">日期</th>
+                    <th className="text-left py-3 px-4 font-medium text-slate-500 text-sm">人数</th>
+                    <th className="text-left py-3 px-4 font-medium text-slate-500 text-sm">预算</th>
+                    <th className="text-left py-3 px-4 font-medium text-slate-500 text-sm">状态</th>
+                    <th className="text-left py-3 px-4 font-medium text-slate-500 text-sm">提交时间</th>
+                    <th className="text-right py-3 px-4 font-medium text-slate-500 text-sm">操作</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {filteredItineraries.map((item) => (
-                    <tr key={item.id} className="hover:bg-gray-50">
+                    <tr key={item.id} className="hover:bg-stone-50">
                       <td className="py-4 px-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                          <div className="w-10 h-10 bg-gradient-to-r from-slate-700 to-slate-600 rounded-full flex items-center justify-center">
                             <span className="text-white font-medium">{item.userName.charAt(0)}</span>
                           </div>
                           <div>
-                            <p className="font-medium text-gray-900">{item.userName}</p>
-                            <p className="text-sm text-gray-500">{item.userEmail}</p>
+                            <p className="font-medium text-slate-900">{item.userName}</p>
+                            <p className="text-sm text-slate-500">{item.userEmail}</p>
                           </div>
                         </div>
                       </td>
@@ -188,7 +188,7 @@ export default function AdminItineraries() {
                         </div>
                       </td>
                       <td className="py-4 px-4">
-                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                        <div className="flex items-center gap-2 text-sm text-slate-600">
                           <Calendar className="w-4 h-4" />
                           <span>
                             {format(item.startDate, 'MM/dd')} - {format(item.endDate, 'MM/dd')}
@@ -196,13 +196,13 @@ export default function AdminItineraries() {
                         </div>
                       </td>
                       <td className="py-4 px-4">
-                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                        <div className="flex items-center gap-2 text-sm text-slate-600">
                           <User className="w-4 h-4" />
                           <span>{getTravelerCount(item)}</span>
                         </div>
                       </td>
                       <td className="py-4 px-4">
-                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                        <div className="flex items-center gap-2 text-sm text-slate-600">
                           <DollarSign className="w-4 h-4" />
                           <span className="font-medium">
                             {item.budgetCurrency === 'CNY' ? '¥' : '$'}
@@ -213,12 +213,12 @@ export default function AdminItineraries() {
                       <td className="py-4 px-4">
                         {getStatusBadge(item.status)}
                         {item.assignedTo && (
-                          <p className="text-xs text-gray-500 mt-1">
+                          <p className="text-xs text-slate-500 mt-1">
                             分配给：{item.assignedTo}
                           </p>
                         )}
                       </td>
-                      <td className="py-4 px-4 text-sm text-gray-500">
+                      <td className="py-4 px-4 text-sm text-slate-500">
                         {format(item.createdAt, 'yyyy-MM-dd HH:mm')}
                       </td>
                       <td className="py-4 px-4 text-right">
@@ -253,8 +253,8 @@ export default function AdminItineraries() {
             
             {filteredItineraries.length === 0 && (
               <div className="py-12 text-center">
-                <Plane className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                <p className="text-gray-500">没有找到匹配的行程</p>
+                <Plane className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+                <p className="text-slate-500">没有找到匹配的行程</p>
               </div>
             )}
           </CardContent>

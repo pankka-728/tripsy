@@ -70,8 +70,8 @@ export default function AdminDestinations() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">目的地管理</h1>
-            <p className="text-gray-500">管理全球和全国旅游目的地 (共 {destinations.length} 个)</p>
+            <h1 className="text-2xl font-bold text-slate-900">目的地管理</h1>
+            <p className="text-slate-500">管理全球和全国旅游目的地 (共 {destinations.length} 个)</p>
           </div>
           <div className="flex gap-2">
             <Button variant="outline">
@@ -95,15 +95,15 @@ export default function AdminDestinations() {
             onClick={() => setRegionFilter('all')}
             className={`p-3 rounded-lg border cursor-pointer transition-all ${
               regionFilter === 'all' 
-                ? 'bg-blue-50 border-blue-200' 
-                : 'bg-white hover:bg-gray-50'
+                ? 'bg-amber-50 border-amber-200' 
+                : 'bg-white hover:bg-stone-50'
             }`}
           >
-            <div className="flex items-center gap-2 text-sm text-gray-600">
+            <div className="flex items-center gap-2 text-sm text-slate-600">
               <Globe className="w-4 h-4" />
               <span>全部</span>
             </div>
-            <div className="text-xl font-bold text-gray-900 mt-1">
+            <div className="text-xl font-bold text-slate-900 mt-1">
               {destinations.length}
             </div>
           </div>
@@ -113,15 +113,15 @@ export default function AdminDestinations() {
               onClick={() => setRegionFilter(region)}
               className={`p-3 rounded-lg border cursor-pointer transition-all ${
                 regionFilter === region 
-                  ? 'bg-blue-50 border-blue-200' 
-                  : 'bg-white hover:bg-gray-50'
+                  ? 'bg-amber-50 border-amber-200' 
+                  : 'bg-white hover:bg-stone-50'
               }`}
             >
-              <div className="flex items-center gap-2 text-sm text-gray-600">
+              <div className="flex items-center gap-2 text-sm text-slate-600">
                 <MapPin className="w-4 h-4" />
                 <span className="truncate">{region}</span>
               </div>
-              <div className="text-xl font-bold text-gray-900 mt-1">
+              <div className="text-xl font-bold text-slate-900 mt-1">
                 {count}
               </div>
             </div>
@@ -131,7 +131,7 @@ export default function AdminDestinations() {
         {/* Filters */}
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
             <Input
               placeholder="搜索目的地名称、英文、国家..."
               value={searchQuery}
@@ -143,7 +143,7 @@ export default function AdminDestinations() {
             <select
               value={regionFilter}
               onChange={(e) => setRegionFilter(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600"
             >
               <option value="all">所有区域</option>
               {regions.map(region => (
@@ -153,7 +153,7 @@ export default function AdminDestinations() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600"
             >
               <option value="all">所有状态</option>
               <option value="active">已启用</option>
@@ -170,21 +170,21 @@ export default function AdminDestinations() {
         <div className="bg-white rounded-lg border overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-stone-50 border-b border-stone-200">
                 <tr>
-                  <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm w-12"></th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">目的地</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">所属区域</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">标签</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">建议天数</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">排序</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">状态</th>
-                  <th className="text-right py-3 px-4 font-medium text-gray-500 text-sm">操作</th>
+                  <th className="text-left py-3 px-4 font-medium text-slate-500 text-sm w-12"></th>
+                  <th className="text-left py-3 px-4 font-medium text-slate-500 text-sm">目的地</th>
+                  <th className="text-left py-3 px-4 font-medium text-slate-500 text-sm">所属区域</th>
+                  <th className="text-left py-3 px-4 font-medium text-slate-500 text-sm">标签</th>
+                  <th className="text-left py-3 px-4 font-medium text-slate-500 text-sm">建议天数</th>
+                  <th className="text-left py-3 px-4 font-medium text-slate-500 text-sm">排序</th>
+                  <th className="text-left py-3 px-4 font-medium text-slate-500 text-sm">状态</th>
+                  <th className="text-right py-3 px-4 font-medium text-slate-500 text-sm">操作</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {filteredDestinations.map((item) => (
-                  <tr key={item.id} className="hover:bg-gray-50">
+                  <tr key={item.id} className="hover:bg-stone-50">
                     <td className="py-3 px-4">
                       {item.isPopular && (
                         <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
@@ -192,8 +192,8 @@ export default function AdminDestinations() {
                     </td>
                     <td className="py-3 px-4">
                       <div>
-                        <p className="font-medium text-gray-900">{item.name}</p>
-                        <p className="text-sm text-gray-500">{item.nameEn || ''} · {item.country}</p>
+                        <p className="font-medium text-slate-900">{item.name}</p>
+                        <p className="text-sm text-slate-500">{item.nameEn || ''} · {item.country}</p>
                       </div>
                     </td>
                     <td className="py-3 px-4">
@@ -207,14 +207,14 @@ export default function AdminDestinations() {
                           </Badge>
                         ))}
                         {item.tags.length > 3 && (
-                          <span className="text-xs text-gray-500">+{item.tags.length - 3}</span>
+                          <span className="text-xs text-slate-500">+{item.tags.length - 3}</span>
                         )}
                       </div>
                     </td>
-                    <td className="py-3 px-4 text-sm text-gray-600">
+                    <td className="py-3 px-4 text-sm text-slate-600">
                       {item.suggestedDays}天
                     </td>
-                    <td className="py-3 px-4 text-sm text-gray-600">
+                    <td className="py-3 px-4 text-sm text-slate-600">
                       {item.sortOrder}
                     </td>
                     <td className="py-3 px-4">
@@ -224,7 +224,7 @@ export default function AdminDestinations() {
                           onCheckedChange={() => {}} 
                         />
                         <span className={`text-sm ${
-                          item.status === 'active' ? 'text-green-600' : 'text-gray-500'
+                          item.status === 'active' ? 'text-green-600' : 'text-slate-500'
                         }`}>
                           {item.status === 'active' ? '已启用' : '已禁用'}
                         </span>
@@ -262,14 +262,14 @@ export default function AdminDestinations() {
           
           {filteredDestinations.length === 0 && (
             <div className="py-12 text-center">
-              <Globe className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-500">没有找到匹配的目的地</p>
+              <Globe className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+              <p className="text-slate-500">没有找到匹配的目的地</p>
             </div>
           )}
         </div>
 
         {/* 分页信息 */}
-        <div className="flex items-center justify-between text-sm text-gray-500">
+        <div className="flex items-center justify-between text-sm text-slate-500">
           <span>显示 {filteredDestinations.length} / {destinations.length} 个目的地</span>
           <div className="flex items-center gap-2">
             <Button variant="outline" size="sm" disabled>上一页</Button>

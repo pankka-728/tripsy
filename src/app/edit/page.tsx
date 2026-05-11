@@ -67,7 +67,7 @@ export default function EditPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-8">
+    <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white py-8">
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Header */}
         <div className="mb-8">
@@ -78,10 +78,10 @@ export default function EditPage() {
           <Card className="border-0 shadow-lg">
             <CardContent className="p-6">
               <div className="flex items-center gap-3 mb-2">
-                <Edit2 className="h-6 w-6 text-blue-600" />
-                <h1 className="text-2xl font-bold text-gray-900">修改行程</h1>
+                <Edit2 className="h-6 w-6 text-amber-700" />
+                <h1 className="text-2xl font-bold text-slate-900">修改行程</h1>
               </div>
-              <p className="text-gray-600">
+              <p className="text-slate-600">
                 用自然语言告诉AI您想要修改的内容，我会实时为您调整行程并重新计算价格。
               </p>
             </CardContent>
@@ -93,50 +93,50 @@ export default function EditPage() {
           <div className="lg:col-span-1">
             <Card className="border-0 shadow-lg sticky top-8">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-900 mb-4">快捷修改</h3>
-                <p className="text-sm text-gray-500 mb-4">点击下方示例快速修改</p>
+                <h3 className="font-semibold text-slate-900 mb-4">快捷修改</h3>
+                <p className="text-sm text-slate-500 mb-4">点击下方示例快速修改</p>
                 <div className="space-y-3">
                   {quickModifications.map((item, index) => (
                     <button
                       key={index}
                       onClick={() => handleQuickModify(item.example)}
-                      className="w-full text-left p-3 rounded-lg border hover:border-blue-500 hover:bg-blue-50 transition-all"
+                      className="w-full text-left p-3 rounded-lg border hover:border-amber-600 hover:bg-amber-50 transition-all"
                     >
-                      <div className="flex items-center gap-2 text-gray-700 mb-1">
+                      <div className="flex items-center gap-2 text-slate-700 mb-1">
                         {item.icon}
                         <span className="font-medium">{item.text}</span>
                       </div>
-                      <p className="text-xs text-gray-500">{item.example}</p>
+                      <p className="text-xs text-slate-500">{item.example}</p>
                     </button>
                   ))}
                 </div>
 
                 <div className="mt-6 pt-6 border-t">
-                  <h4 className="font-medium text-gray-900 mb-3">修改范围</h4>
+                  <h4 className="font-medium text-slate-900 mb-3">修改范围</h4>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 text-sm">
                       <CheckCircle className="h-4 w-4 text-green-500" />
-                      <span className="text-gray-600">更换景点</span>
+                      <span className="text-slate-600">更换景点</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                       <CheckCircle className="h-4 w-4 text-green-500" />
-                      <span className="text-gray-600">调整酒店</span>
+                      <span className="text-slate-600">调整酒店</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                       <CheckCircle className="h-4 w-4 text-green-500" />
-                      <span className="text-gray-600">变更交通</span>
+                      <span className="text-slate-600">变更交通</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                       <CheckCircle className="h-4 w-4 text-green-500" />
-                      <span className="text-gray-600">调整餐饮</span>
+                      <span className="text-slate-600">调整餐饮</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                       <CheckCircle className="h-4 w-4 text-green-500" />
-                      <span className="text-gray-600">预算优化</span>
+                      <span className="text-slate-600">预算优化</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                       <CheckCircle className="h-4 w-4 text-green-500" />
-                      <span className="text-gray-600">增减天数</span>
+                      <span className="text-slate-600">增减天数</span>
                     </div>
                   </div>
                 </div>
@@ -158,8 +158,8 @@ export default function EditPage() {
                       <div
                         className={`max-w-[80%] p-4 rounded-2xl ${
                           chat.role === 'user'
-                            ? 'bg-blue-600 text-white rounded-tr-none'
-                            : 'bg-gray-100 text-gray-900 rounded-tl-none'
+                            ? 'bg-amber-700 text-white rounded-tr-none'
+                            : 'bg-stone-100 text-slate-900 rounded-tl-none'
                         }`}
                       >
                         <div className="whitespace-pre-line text-sm">
@@ -170,7 +170,7 @@ export default function EditPage() {
                   ))}
                   {loading && (
                     <div className="flex justify-start">
-                      <div className="bg-gray-100 p-4 rounded-2xl rounded-tl-none">
+                      <div className="bg-stone-100 p-4 rounded-2xl rounded-tl-none">
                         <div className="flex gap-2">
                           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
@@ -182,7 +182,7 @@ export default function EditPage() {
                 </div>
 
                 {/* Input Area */}
-                <div className="p-6 border-t bg-gray-50 rounded-b-xl">
+                <div className="p-6 border-t bg-stone-50 rounded-b-xl">
                   <div className="flex gap-3">
                     <Textarea
                       placeholder="告诉我您想如何修改行程...例如：把第二天的博物馆换成美术馆"

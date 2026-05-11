@@ -87,20 +87,20 @@ export default function MemberCenterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-stone-50">
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 text-white">
+      <div className="bg-gradient-to-r from-slate-800 via-slate-600 to-slate-700 text-white">
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center gap-6">
             {/* Avatar */}
             <div className="relative">
               <Avatar className="h-24 w-24 border-4 border-white/30">
                 <AvatarImage src={user.avatar} alt={user.nickname} />
-                <AvatarFallback className="text-2xl bg-blue-400">
+                <AvatarFallback className="text-2xl bg-amber-500">
                   {user.nickname.slice(0, 2)}
                 </AvatarFallback>
               </Avatar>
-              <button className="absolute -bottom-1 -right-1 bg-white text-blue-600 rounded-full p-1 shadow-lg hover:bg-gray-100">
+              <button className="absolute -bottom-1 -right-1 bg-white text-amber-700 rounded-full p-1 shadow-lg hover:bg-stone-100">
                 <Camera className="h-4 w-4" />
               </button>
             </div>
@@ -127,7 +127,7 @@ export default function MemberCenterPage() {
                 )}
               </div>
               
-              <div className="flex items-center gap-4 text-blue-100">
+              <div className="flex items-center gap-4 text-amber-100">
                 <span>{user.phone || user.email}</span>
                 <span>·</span>
                 <span>已出行 {user.tripCount} 次</span>
@@ -146,28 +146,28 @@ export default function MemberCenterPage() {
               <CardContent className="p-4 text-center">
                 <Gift className="h-6 w-6 mx-auto mb-2 text-yellow-300" />
                 <div className="text-2xl font-bold">{user.points.toLocaleString()}</div>
-                <div className="text-sm text-blue-100">可用积分</div>
+                <div className="text-sm text-amber-100">可用积分</div>
               </CardContent>
             </Card>
             <Card className="bg-white/10 border-0 backdrop-blur">
               <CardContent className="p-4 text-center">
                 <Ticket className="h-6 w-6 mx-auto mb-2 text-orange-300" />
                 <div className="text-2xl font-bold">{user.couponCount}</div>
-                <div className="text-sm text-blue-100">优惠券</div>
+                <div className="text-sm text-amber-100">优惠券</div>
               </CardContent>
             </Card>
             <Card className="bg-white/10 border-0 backdrop-blur">
               <CardContent className="p-4 text-center">
                 <MapPin className="h-6 w-6 mx-auto mb-2 text-green-300" />
                 <div className="text-2xl font-bold">{user.tripCount}</div>
-                <div className="text-sm text-blue-100">定制次数</div>
+                <div className="text-sm text-amber-100">定制次数</div>
               </CardContent>
             </Card>
             <Card className="bg-white/10 border-0 backdrop-blur">
               <CardContent className="p-4 text-center">
                 <Award className="h-6 w-6 mx-auto mb-2 text-purple-300" />
                 <div className="text-2xl font-bold">{membershipInfo.pointsMultiplier}x</div>
-                <div className="text-sm text-blue-100">积分倍率</div>
+                <div className="text-sm text-amber-100">积分倍率</div>
               </CardContent>
             </Card>
           </div>
@@ -188,18 +188,18 @@ export default function MemberCenterPage() {
                       <button
                         key={item.id}
                         onClick={() => setActiveTab(item.id)}
-                        className={`w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors ${
-                          activeTab === item.id ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+                        className={`w-full flex items-center justify-between p-4 hover:bg-stone-50 transition-colors ${
+                          activeTab === item.id ? 'bg-amber-50 text-amber-700' : 'text-slate-700'
                         }`}
                       >
                         <div className="flex items-center gap-3">
                           <Icon className="h-5 w-5" />
                           <div className="text-left">
                             <div className="font-medium">{item.label}</div>
-                            <div className="text-xs text-gray-500">{item.description}</div>
+                            <div className="text-xs text-slate-500">{item.description}</div>
                           </div>
                         </div>
-                        <ChevronRight className="h-4 w-4 text-gray-400" />
+                        <ChevronRight className="h-4 w-4 text-slate-400" />
                       </button>
                     );
                   })}
@@ -228,12 +228,12 @@ export default function MemberCenterPage() {
                     <div className="space-y-6">
                       <div className="grid grid-cols-2 gap-6">
                         <div className="space-y-2">
-                          <label className="text-sm font-medium text-gray-700">昵称</label>
+                          <label className="text-sm font-medium text-slate-700">昵称</label>
                           <Input defaultValue={user.nickname} />
                         </div>
                         <div className="space-y-2">
-                          <label className="text-sm font-medium text-gray-700">性别</label>
-                          <select className="w-full rounded-md border border-gray-200 px-3 py-2">
+                          <label className="text-sm font-medium text-slate-700">性别</label>
+                          <select className="w-full rounded-md border border-stone-200 px-3 py-2">
                             <option value="male">男</option>
                             <option value="female">女</option>
                             <option value="other">其他</option>
@@ -243,24 +243,24 @@ export default function MemberCenterPage() {
 
                       <div className="grid grid-cols-2 gap-6">
                         <div className="space-y-2">
-                          <label className="text-sm font-medium text-gray-700">手机号</label>
+                          <label className="text-sm font-medium text-slate-700">手机号</label>
                           <Input defaultValue={user.phone} disabled />
                         </div>
                         <div className="space-y-2">
-                          <label className="text-sm font-medium text-gray-700">邮箱</label>
+                          <label className="text-sm font-medium text-slate-700">邮箱</label>
                           <Input defaultValue={user.email} />
                         </div>
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-sm font-medium text-gray-700">生日</label>
+                        <label className="text-sm font-medium text-slate-700">生日</label>
                         <Input type="date" defaultValue={user.birthday} />
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-sm font-medium text-gray-700">个人简介</label>
+                        <label className="text-sm font-medium text-slate-700">个人简介</label>
                         <textarea 
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 min-h-[100px]"
+                          className="w-full rounded-md border border-stone-200 px-3 py-2 min-h-[100px]"
                           defaultValue={user.bio}
                           placeholder="介绍一下自己吧..."
                         />
@@ -268,7 +268,7 @@ export default function MemberCenterPage() {
 
                       <div className="flex justify-end gap-3">
                         <Button variant="secondary">取消</Button>
-                        <Button className="bg-blue-600 hover:bg-blue-700">保存修改</Button>
+                        <Button className="bg-amber-700 hover:bg-amber-800">保存修改</Button>
                       </div>
                     </div>
                   </CardContent>
@@ -280,8 +280,8 @@ export default function MemberCenterPage() {
                 <Card className="border-0 shadow-sm">
                   <CardContent className="p-6">
                     <h2 className="text-xl font-bold mb-6">我的订单</h2>
-                    <div className="text-center py-12 text-gray-500">
-                      <Calendar className="h-12 w-12 mx-auto mb-4 text-gray-300" />
+                    <div className="text-center py-12 text-slate-500">
+                      <Calendar className="h-12 w-12 mx-auto mb-4 text-slate-300" />
                       <p>暂无订单记录</p>
                       <Button variant="secondary" className="mt-4" onClick={() => router.push('/')}>
                         去定制行程
@@ -296,8 +296,8 @@ export default function MemberCenterPage() {
                 <Card className="border-0 shadow-sm">
                   <CardContent className="p-6">
                     <h2 className="text-xl font-bold mb-6">我的收藏</h2>
-                    <div className="text-center py-12 text-gray-500">
-                      <Heart className="h-12 w-12 mx-auto mb-4 text-gray-300" />
+                    <div className="text-center py-12 text-slate-500">
+                      <Heart className="h-12 w-12 mx-auto mb-4 text-slate-300" />
                       <p>暂无收藏的目的地</p>
                       <Button variant="secondary" className="mt-4" onClick={() => router.push('/destinations')}>
                         去探索目的地
@@ -312,8 +312,8 @@ export default function MemberCenterPage() {
                 <Card className="border-0 shadow-sm">
                   <CardContent className="p-6">
                     <h2 className="text-xl font-bold mb-6">优惠券</h2>
-                    <div className="text-center py-12 text-gray-500">
-                      <Ticket className="h-12 w-12 mx-auto mb-4 text-gray-300" />
+                    <div className="text-center py-12 text-slate-500">
+                      <Ticket className="h-12 w-12 mx-auto mb-4 text-slate-300" />
                       <p>暂无可用优惠券</p>
                     </div>
                   </CardContent>
@@ -327,8 +327,8 @@ export default function MemberCenterPage() {
                     <h2 className="text-xl font-bold mb-6">积分中心</h2>
                     <div className="text-center py-12">
                       <Gift className="h-12 w-12 mx-auto mb-4 text-yellow-500" />
-                      <div className="text-4xl font-bold text-gray-900 mb-2">{user.points.toLocaleString()}</div>
-                      <p className="text-gray-500 mb-6">可用积分</p>
+                      <div className="text-4xl font-bold text-slate-900 mb-2">{user.points.toLocaleString()}</div>
+                      <p className="text-slate-500 mb-6">可用积分</p>
                       <Button variant="secondary">查看积分规则</Button>
                     </div>
                   </CardContent>
@@ -348,7 +348,7 @@ export default function MemberCenterPage() {
                           <div className="flex items-center justify-between">
                             <div>
                               <div className="font-medium">邮件通知</div>
-                              <div className="text-sm text-gray-500">接收订单、优惠等邮件</div>
+                              <div className="text-sm text-slate-500">接收订单、优惠等邮件</div>
                             </div>
                             <Switch 
                               checked={user.preferences.emailNotification} 
@@ -360,7 +360,7 @@ export default function MemberCenterPage() {
                           <div className="flex items-center justify-between">
                             <div>
                               <div className="font-medium">短信通知</div>
-                              <div className="text-sm text-gray-500">接收重要短信提醒</div>
+                              <div className="text-sm text-slate-500">接收重要短信提醒</div>
                             </div>
                             <Switch 
                               checked={user.preferences.smsNotification}
@@ -372,7 +372,7 @@ export default function MemberCenterPage() {
                           <div className="flex items-center justify-between">
                             <div>
                               <div className="font-medium">微信通知</div>
-                              <div className="text-sm text-gray-500">接收微信消息推送</div>
+                              <div className="text-sm text-slate-500">接收微信消息推送</div>
                             </div>
                             <Switch 
                               checked={user.preferences.wechatNotification}
@@ -387,17 +387,17 @@ export default function MemberCenterPage() {
                       <div className="border-t pt-6">
                         <h3 className="font-medium mb-4">账号安全</h3>
                         <div className="space-y-3">
-                          <button className="w-full flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+                          <button className="w-full flex items-center justify-between p-3 border rounded-lg hover:bg-stone-50">
                             <span>修改密码</span>
-                            <ChevronRight className="h-4 w-4 text-gray-400" />
+                            <ChevronRight className="h-4 w-4 text-slate-400" />
                           </button>
-                          <button className="w-full flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+                          <button className="w-full flex items-center justify-between p-3 border rounded-lg hover:bg-stone-50">
                             <span>绑定手机</span>
-                            <ChevronRight className="h-4 w-4 text-gray-400" />
+                            <ChevronRight className="h-4 w-4 text-slate-400" />
                           </button>
-                          <button className="w-full flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+                          <button className="w-full flex items-center justify-between p-3 border rounded-lg hover:bg-stone-50">
                             <span>绑定微信</span>
-                            <ChevronRight className="h-4 w-4 text-gray-400" />
+                            <ChevronRight className="h-4 w-4 text-slate-400" />
                           </button>
                         </div>
                       </div>

@@ -71,8 +71,8 @@ export default function ItineraryContent() {
   const getWeatherIcon = (condition: string) => {
     switch (condition) {
       case 'sunny': return <Sun className="h-5 w-5 text-yellow-500" />;
-      case 'cloudy': return <Cloud className="h-5 w-5 text-gray-400" />;
-      case 'rainy': return <CloudRain className="h-5 w-5 text-blue-400" />;
+      case 'cloudy': return <Cloud className="h-5 w-5 text-slate-400" />;
+      case 'rainy': return <CloudRain className="h-5 w-5 text-slate-400" />;
       case 'snowy': return <Snowflake className="h-5 w-5 text-cyan-400" />;
       default: return <Sun className="h-5 w-5 text-yellow-500" />;
     }
@@ -80,8 +80,8 @@ export default function ItineraryContent() {
 
   const getActivityIcon = (type: string) => {
     switch (type) {
-      case 'sightseeing': return <MapPin className="h-4 w-4 text-blue-500" />;
-      case 'transport': return <Bus className="h-4 w-4 text-gray-500" />;
+      case 'sightseeing': return <MapPin className="h-4 w-4 text-amber-600" />;
+      case 'transport': return <Bus className="h-4 w-4 text-slate-500" />;
       case 'meal': return <Utensils className="h-4 w-4 text-orange-500" />;
       case 'hotel': return <Home className="h-4 w-4 text-green-500" />;
       default: return <Clock className="h-4 w-4 text-purple-500" />;
@@ -90,12 +90,12 @@ export default function ItineraryContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
+      <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white py-12">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-600 border-t-transparent mx-auto mb-6"></div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">AI旅游规划师正在为您生成行程</h2>
-            <p className="text-gray-600">正在联网查询最新信息，约需3秒...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-amber-700 border-t-transparent mx-auto mb-6"></div>
+            <h2 className="text-2xl font-bold text-slate-900 mb-2">AI旅游规划师正在为您生成行程</h2>
+            <p className="text-slate-600">正在联网查询最新信息，约需3秒...</p>
           </div>
         </div>
       </div>
@@ -104,9 +104,9 @@ export default function ItineraryContent() {
 
   if (!itinerary) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
+      <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white py-12">
         <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">未找到行程</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">未找到行程</h2>
           <Button asChild>
             <a href="/plan">返回定制页面</a>
           </Button>
@@ -116,21 +116,21 @@ export default function ItineraryContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-8">
+    <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white py-8">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="max-w-6xl mx-auto mb-8">
           <div className="bg-white rounded-2xl shadow-lg p-8">
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
               <div>
-                <Badge className="mb-4 bg-blue-100 text-blue-700 hover:bg-blue-100">
+                <Badge className="mb-4 bg-amber-100 text-amber-800 hover:bg-amber-100">
                   智能生成
                 </Badge>
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+                <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">
                   {itinerary.title}
                 </h1>
-                <p className="text-lg text-gray-600 mb-4">{itinerary.description}</p>
-                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+                <p className="text-lg text-slate-600 mb-4">{itinerary.description}</p>
+                <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
                   <span className="flex items-center gap-1">
                     <Calendar className="h-4 w-4" />
                     {itinerary.request.departureDate} · {itinerary.request.days}天
@@ -148,10 +148,10 @@ export default function ItineraryContent() {
                 </div>
               </div>
               <div className="text-center md:text-right">
-                <div className="text-4xl font-bold text-blue-600 mb-1">
+                <div className="text-4xl font-bold text-amber-700 mb-1">
                   ¥{itinerary.budget.total.toLocaleString()}
                 </div>
-                <p className="text-sm text-gray-500 mb-4">总预算（{itinerary.budget.currency}）</p>
+                <p className="text-sm text-slate-500 mb-4">总预算（{itinerary.budget.currency}）</p>
                 <div className="flex gap-3">
                   <Button variant="secondary" onClick={() => router.push('/edit')}>
                     <Edit2 className="h-4 w-4 mr-2" />
@@ -181,7 +181,7 @@ export default function ItineraryContent() {
               {itinerary.days.map((day) => (
                 <Card key={day.day} className="border-0 shadow-lg overflow-hidden">
                   <div 
-                    className="bg-gradient-to-r from-blue-500 to-purple-500 p-6 cursor-pointer"
+                    className="bg-gradient-to-r from-slate-800 to-slate-700 p-6 cursor-pointer"
                     onClick={() => toggleDay(day.day)}
                   >
                     <div className="flex items-center justify-between">
@@ -212,31 +212,31 @@ export default function ItineraryContent() {
                     <CardContent className="p-6">
                       <div className="space-y-4">
                         {day.activities.map((activity, index) => (
-                          <div key={index} className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+                          <div key={index} className="flex gap-4 p-4 rounded-lg hover:bg-stone-50 transition-colors">
                             <div className="flex-shrink-0 w-16">
-                              <div className="text-sm font-medium text-gray-500">{activity.time}</div>
+                              <div className="text-sm font-medium text-slate-500">{activity.time}</div>
                             </div>
                             <div className="flex-shrink-0 w-8 pt-1">
                               {getActivityIcon(activity.type)}
                             </div>
                             <div className="flex-1">
-                              <h4 className="font-semibold text-gray-900 mb-1">{activity.title}</h4>
-                              <p className="text-gray-600 text-sm mb-2">{activity.description}</p>
+                              <h4 className="font-semibold text-slate-900 mb-1">{activity.title}</h4>
+                              <p className="text-slate-600 text-sm mb-2">{activity.description}</p>
                               {activity.location && (
-                                <div className="flex items-center gap-1 text-sm text-gray-500">
+                                <div className="flex items-center gap-1 text-sm text-slate-500">
                                   <MapPin className="h-3 w-3" />
                                   {activity.location}
                                 </div>
                               )}
                               {activity.duration && (
-                                <div className="text-sm text-gray-500 mt-1">
+                                <div className="text-sm text-slate-500 mt-1">
                                   建议游玩：{activity.duration}
                                 </div>
                               )}
                             </div>
                             {activity.price && (
                               <div className="flex-shrink-0 text-right">
-                                <div className="font-semibold text-blue-600">
+                                <div className="font-semibold text-amber-700">
                                   ¥{activity.price.toLocaleString()}
                                 </div>
                               </div>
@@ -254,16 +254,16 @@ export default function ItineraryContent() {
             <TabsContent value="budget">
               <Card className="border-0 shadow-lg">
                 <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">预算明细</h3>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-6">预算明细</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
-                      <div className="text-sm text-blue-600 font-medium mb-2">总预算</div>
-                      <div className="text-3xl font-bold text-blue-700">
+                    <div className="p-6 bg-gradient-to-br from-amber-50 to-amber-100/70 rounded-xl">
+                      <div className="text-sm text-amber-700 font-medium mb-2">总预算</div>
+                      <div className="text-3xl font-bold text-amber-800">
                         ¥{itinerary.budget.total.toLocaleString()}
                       </div>
-                      <div className="text-sm text-blue-500 mt-1">{itinerary.budget.currency}</div>
+                      <div className="text-sm text-amber-600 mt-1">{itinerary.budget.currency}</div>
                     </div>
-                    <div className="p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+                    <div className="p-6 bg-gradient-to-br from-stone-50 to-stone-100 rounded-xl">
                       <div className="text-sm text-purple-600 font-medium mb-2">人均预算</div>
                       <div className="text-3xl font-bold text-purple-700">
                         ¥{Math.round(itinerary.budget.total / (
@@ -279,10 +279,10 @@ export default function ItineraryContent() {
                     {itinerary.budget.items.map((item, index) => (
                       <div key={index} className="flex items-center justify-between p-4 border-b last:border-0">
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                          <span className="text-gray-900">{item.name}</span>
+                          <div className="w-2 h-2 rounded-full bg-amber-600"></div>
+                          <span className="text-slate-900">{item.name}</span>
                         </div>
-                        <span className="font-semibold text-gray-900">¥{item.amount.toLocaleString()}</span>
+                        <span className="font-semibold text-slate-900">¥{item.amount.toLocaleString()}</span>
                       </div>
                     ))}
                   </div>
@@ -294,12 +294,12 @@ export default function ItineraryContent() {
             <TabsContent value="highlights">
               <Card className="border-0 shadow-lg">
                 <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">行程亮点</h3>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-6">行程亮点</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {itinerary.highlights.map((highlight, index) => (
-                      <div key={index} className="flex items-start gap-3 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
-                        <CheckCircle className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-800">{highlight}</span>
+                      <div key={index} className="flex items-start gap-3 p-4 bg-gradient-to-r from-amber-50/70 to-stone-50 rounded-lg">
+                        <CheckCircle className="h-5 w-5 text-amber-700 mt-0.5 flex-shrink-0" />
+                        <span className="text-slate-800">{highlight}</span>
                       </div>
                     ))}
                   </div>
@@ -311,7 +311,7 @@ export default function ItineraryContent() {
             <TabsContent value="tips">
               <Card className="border-0 shadow-lg">
                 <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">温馨提示</h3>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-6">温馨提示</h3>
                   <div className="space-y-4">
                     {itinerary.tips.map((tip, index) => (
                       <div key={index} className="flex items-start gap-3 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
@@ -337,7 +337,7 @@ export default function ItineraryContent() {
               <Download className="h-5 w-5 mr-2" />
               生成PDF游记
             </Button>
-            <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600">
+            <Button size="lg" className="bg-gradient-to-r from-slate-800 to-slate-700 hover:from-slate-900 hover:to-slate-800">
               <CheckCircle className="h-5 w-5 mr-2" />
               确认满意，下一步
               <ArrowRight className="h-5 w-5 ml-2" />

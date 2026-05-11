@@ -88,7 +88,7 @@ export default function CitySearch({ value, onChange, placeholder = "输入城�
   return (
     <div ref={containerRef} className="relative w-full">
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
         <Input
           ref={inputRef}
           value={query}
@@ -105,7 +105,7 @@ export default function CitySearch({ value, onChange, placeholder = "输入城�
         {query && (
           <button
             onClick={handleClear}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
           >
             <X className="h-4 w-4" />
           </button>
@@ -118,26 +118,26 @@ export default function CitySearch({ value, onChange, placeholder = "输入城�
             <button
               key={`${city.name}-${index}`}
               onClick={() => handleSelect(city)}
-              className={`w-full text-left px-4 py-3 flex items-start gap-3 hover:bg-gray-50 transition-colors ${
-                index === highlightedIndex ? "bg-gray-50" : ""
+              className={`w-full text-left px-4 py-3 flex items-start gap-3 hover:bg-stone-50 transition-colors ${
+                index === highlightedIndex ? "bg-stone-50" : ""
               }`}
             >
-              <MapPin className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+              <MapPin className="h-4 w-4 text-amber-600 mt-0.5 flex-shrink-0" />
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="font-medium text-gray-900">{city.name}</span>
-                  <span className="text-sm text-gray-500">{city.nameEn}</span>
+                  <span className="font-medium text-slate-900">{city.name}</span>
+                  <span className="text-sm text-slate-500">{city.nameEn}</span>
                 </div>
                 <div className="flex items-center gap-2 mt-0.5">
-                  <span className="text-xs text-gray-500">{city.country}</span>
-                  <span className="text-xs text-gray-400">·</span>
-                  <span className="text-xs text-gray-500">{city.region}</span>
-                  <span className="text-xs text-gray-400">·</span>
-                  <span className="text-xs text-blue-500">建议{city.suggestedDays}天</span>
+                  <span className="text-xs text-slate-500">{city.country}</span>
+                  <span className="text-xs text-slate-400">·</span>
+                  <span className="text-xs text-slate-500">{city.region}</span>
+                  <span className="text-xs text-slate-400">·</span>
+                  <span className="text-xs text-amber-600">建议{city.suggestedDays}天</span>
                 </div>
                 <div className="flex flex-wrap gap-1 mt-1">
                   {city.tags.slice(0, 3).map((tag, i) => (
-                    <span key={i} className="text-xs px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded">
+                    <span key={i} className="text-xs px-1.5 py-0.5 bg-stone-100 text-slate-600 rounded">
                       {tag}
                     </span>
                   ))}
@@ -149,7 +149,7 @@ export default function CitySearch({ value, onChange, placeholder = "输入城�
       )}
 
       {isOpen && query.trim().length > 0 && results.length === 0 && (
-        <div className="absolute z-50 w-full mt-1 bg-white border rounded-lg shadow-lg p-4 text-center text-gray-500">
+        <div className="absolute z-50 w-full mt-1 bg-white border rounded-lg shadow-lg p-4 text-center text-slate-500">
           未找到匹配的城市，请尝试其他关键词
         </div>
       )}

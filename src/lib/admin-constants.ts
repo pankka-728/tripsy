@@ -65,15 +65,15 @@ export const ADMIN_NAV_ITEMS = [
 
 export const ITINERARY_STATUS = {
   pending: { label: '待处理', class: 'bg-yellow-100 text-yellow-800' },
-  planning: { label: '规划中', class: 'bg-blue-100 text-blue-800' },
+  planning: { label: '规划中', class: 'bg-amber-100 text-amber-900' },
   confirmed: { label: '已确认', class: 'bg-green-100 text-green-800' },
-  completed: { label: '已完成', class: 'bg-gray-100 text-gray-800' },
+  completed: { label: '已完成', class: 'bg-stone-100 text-slate-800' },
   cancelled: { label: '已取消', class: 'bg-red-100 text-red-800' },
 } as const;
 
 export const ORDER_STATUS = {
   pending_payment: { label: '待支付', class: 'bg-yellow-100 text-yellow-800' },
-  paid: { label: '已支付', class: 'bg-blue-100 text-blue-800' },
+  paid: { label: '已支付', class: 'bg-amber-100 text-amber-900' },
   producing: { label: '制作中', class: 'bg-purple-100 text-purple-800' },
   shipped: { label: '已发货', class: 'bg-orange-100 text-orange-800' },
   completed: { label: '已完成', class: 'bg-green-100 text-green-800' },

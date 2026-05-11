@@ -64,7 +64,7 @@ export default function PDFPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-8">
+    <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white py-8">
       <div className="container mx-auto px-4 max-w-5xl">
         {/* Header */}
         <div className="mb-8">
@@ -77,14 +77,14 @@ export default function PDFPage() {
             <CardContent className="p-8">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div className="flex items-start gap-4">
-                  <div className="bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl p-4">
+                  <div className="bg-gradient-to-br from-slate-700 to-slate-600 rounded-2xl p-4">
                     <BookOpen className="h-8 w-8 text-white" />
                   </div>
                   <div>
-                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                    <h1 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">
                       生成游记式行程书
                     </h1>
-                    <p className="text-gray-600">
+                    <p className="text-slate-600">
                       将您的完美旅程变成精美的PDF游记，永久珍藏美好回忆
                     </p>
                   </div>
@@ -93,7 +93,7 @@ export default function PDFPage() {
                   size="lg" 
                   onClick={handleGeneratePDF}
                   disabled={generating}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600"
+                  className="bg-gradient-to-r from-slate-800 to-slate-700"
                 >
                   {generating ? (
                     <>
@@ -116,14 +116,14 @@ export default function PDFPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <Card className="border-0 shadow-lg overflow-hidden">
-              <div className="bg-gray-100 px-4 py-2 border-b flex items-center justify-between">
-                <span className="text-sm text-gray-600 flex items-center gap-2">
+              <div className="bg-stone-100 px-4 py-2 border-b flex items-center justify-between">
+                <span className="text-sm text-slate-600 flex items-center gap-2">
                   <FileText className="h-4 w-4" />
                   游记预览
                 </span>
-                <span className="text-xs text-gray-500">A4尺寸</span>
+                <span className="text-xs text-slate-500">A4尺寸</span>
               </div>
-              <CardContent className="p-0 bg-gray-200">
+              <CardContent className="p-0 bg-stone-200">
                 <div className="p-8 flex justify-center">
                   {/* PDF Preview */}
                   <div 
@@ -132,7 +132,7 @@ export default function PDFPage() {
                     style={{ aspectRatio: '210/297' }}
                   >
                     {/* Cover Page */}
-                    <div className="p-8 h-full flex flex-col bg-gradient-to-br from-blue-500 to-purple-600 text-white">
+                    <div className="p-8 h-full flex flex-col bg-gradient-to-br from-slate-700 to-slate-700 text-white">
                       <div className="flex-1 flex flex-col justify-center items-center text-center">
                         <Sparkles className="h-16 w-16 mb-6 opacity-80" />
                         <h1 className="text-4xl font-bold mb-4">{MOCK_ITINERARY.title}</h1>
@@ -162,34 +162,34 @@ export default function PDFPage() {
           <div className="space-y-6">
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-900 mb-4">游记特色</h3>
+                <h3 className="font-semibold text-slate-900 mb-4">游记特色</h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-gray-900">精美排版</p>
-                      <p className="text-sm text-gray-600">专业的杂志式排版设计</p>
+                      <p className="font-medium text-slate-900">精美排版</p>
+                      <p className="text-sm text-slate-600">专业的杂志式排版设计</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-gray-900">图文并茂</p>
-                      <p className="text-sm text-gray-600">景点美图让游记更生动</p>
+                      <p className="font-medium text-slate-900">图文并茂</p>
+                      <p className="text-sm text-slate-600">景点美图让游记更生动</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-gray-900">完整信息</p>
-                      <p className="text-sm text-gray-600">包含所有行程细节和预算</p>
+                      <p className="font-medium text-slate-900">完整信息</p>
+                      <p className="text-sm text-slate-600">包含所有行程细节和预算</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-gray-900">永久保存</p>
-                      <p className="text-sm text-gray-600">PDF格式方便存储和分享</p>
+                      <p className="font-medium text-slate-900">永久保存</p>
+                      <p className="text-sm text-slate-600">PDF格式方便存储和分享</p>
                     </div>
                   </div>
                 </div>
@@ -220,7 +220,7 @@ export default function PDFPage() {
                 返回行程
               </Button>
               <Button 
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600"
+                className="w-full bg-gradient-to-r from-slate-800 to-slate-700"
                 onClick={() => router.push('/book')}
               >
                 下一步：定制纪念册

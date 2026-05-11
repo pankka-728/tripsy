@@ -14,7 +14,7 @@ export default function FAQPage() {
   const categories = [
     {
       title: "预订相关",
-      icon: <Calendar className="h-6 w-6 text-blue-600" />,
+      icon: <Calendar className="h-6 w-6 text-amber-700" />,
       questions: [
         {
           q: "如何定制旅行行程？",
@@ -104,7 +104,7 @@ export default function FAQPage() {
     },
     {
       title: "其他问题",
-      icon: <HelpCircle className="h-6 w-6 text-gray-600" />,
+      icon: <HelpCircle className="h-6 w-6 text-slate-600" />,
       questions: [
         {
           q: "如何成为合作伙伴？",
@@ -123,15 +123,15 @@ export default function FAQPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
+    <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white py-12">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 mb-6">
-            <HelpCircle className="h-8 w-8 text-blue-600" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-100 mb-6">
+            <HelpCircle className="h-8 w-8 text-amber-700" />
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">常见问题</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">常见问题</h1>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             找到您想要的答案。如果没有，请联系我们的客服团队
           </p>
         </div>
@@ -141,10 +141,10 @@ export default function FAQPage() {
             <Card key={catIndex} className="border-0 shadow-lg">
               <CardContent className="p-8">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="bg-gray-50 rounded-full p-3">
+                  <div className="bg-stone-50 rounded-full p-3">
                     {category.icon}
                   </div>
-                  <h2 className="text-xl font-bold text-gray-900">{category.title}</h2>
+                  <h2 className="text-xl font-bold text-slate-900">{category.title}</h2>
                 </div>
                 <Accordion type="single" collapsible className="space-y-4">
                   {category.questions.map((question, qIndex) => (
@@ -153,10 +153,10 @@ export default function FAQPage() {
                       value={`${catIndex}-${qIndex}`}
                       className="border-b last:border-b-0"
                     >
-                      <AccordionTrigger className="text-left font-medium text-gray-900 hover:no-underline py-4">
+                      <AccordionTrigger className="text-left font-medium text-slate-900 hover:no-underline py-4">
                         {question.q}
                       </AccordionTrigger>
-                      <AccordionContent className="text-gray-600 pb-4">
+                      <AccordionContent className="text-slate-600 pb-4">
                         {question.a}
                       </AccordionContent>
                     </AccordionItem>
@@ -169,7 +169,7 @@ export default function FAQPage() {
 
         {/* Still Have Questions */}
         <div className="mt-16 text-center">
-          <Card className="border-0 shadow-lg max-w-2xl mx-auto bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+          <Card className="border-0 shadow-lg max-w-2xl mx-auto bg-gradient-to-r from-slate-700 to-slate-600 text-white">
             <CardContent className="p-8">
               <h3 className="text-2xl font-bold mb-4">还有问题？</h3>
               <p className="text-white/90 mb-6">
@@ -179,7 +179,7 @@ export default function FAQPage() {
                 <Button variant="secondary" asChild>
                   <a href="/contact">联系我们</a>
                 </Button>
-                <Button className="bg-white text-blue-600 hover:bg-gray-100" asChild>
+                <Button className="bg-white text-amber-700 hover:bg-stone-100" asChild>
                   <a href="mailto:support@tripsy.com">发送邮件</a>
                 </Button>
               </div>

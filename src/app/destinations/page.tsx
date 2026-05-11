@@ -132,12 +132,12 @@ export default function DestinationsPage() {
   }, [selectedRegionGroup]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
+    <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white py-12">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">探索目的地</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">探索目的地</h1>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             发现全球{transformDestinations.length}个热门旅行目的地，找到您的下一个旅行灵感
           </p>
         </div>
@@ -148,7 +148,7 @@ export default function DestinationsPage() {
             <CardContent className="p-6">
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
                   <Input
                     placeholder="搜索目的地、城市、国家或关键词（支持中英文）..."
                     value={searchTerm}
@@ -165,7 +165,7 @@ export default function DestinationsPage() {
               
               {/* 区域组筛选 */}
               <div className="flex flex-wrap gap-2 mt-4">
-                <span className="text-sm text-gray-500 mr-2">区域：</span>
+                <span className="text-sm text-slate-500 mr-2">区域：</span>
                 {regionGroups.map((group) => (
                   <Button
                     key={group.key}
@@ -175,7 +175,7 @@ export default function DestinationsPage() {
                       setSelectedRegionGroup(group.key);
                       setSelectedRegion(null);
                     }}
-                    className={selectedRegionGroup === group.key ? "bg-blue-600" : ""}
+                    className={selectedRegionGroup === group.key ? "bg-amber-700" : ""}
                   >
                     {group.label}
                   </Button>
@@ -185,12 +185,12 @@ export default function DestinationsPage() {
               {/* 子区域筛选 */}
               {availableRegions.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t">
-                  <span className="text-sm text-gray-500 mr-2">子区域：</span>
+                  <span className="text-sm text-slate-500 mr-2">子区域：</span>
                   <Button
                     variant={selectedRegion === null ? "default" : "secondary"}
                     size="sm"
                     onClick={() => setSelectedRegion(null)}
-                    className={selectedRegion === null ? "bg-blue-600" : ""}
+                    className={selectedRegion === null ? "bg-amber-700" : ""}
                   >
                     全部
                   </Button>
@@ -200,7 +200,7 @@ export default function DestinationsPage() {
                       variant={selectedRegion === region ? "default" : "secondary"}
                       size="sm"
                       onClick={() => setSelectedRegion(region)}
-                      className={selectedRegion === region ? "bg-blue-600" : ""}
+                      className={selectedRegion === region ? "bg-amber-700" : ""}
                     >
                       {regionLabels[region] || region}
                     </Button>
@@ -214,12 +214,12 @@ export default function DestinationsPage() {
         {/* Destinations Grid */}
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">
+            <h2 className="text-2xl font-bold text-slate-900">
               {filteredDestinations.length} 个目的地
-              {searchTerm && <span className="text-gray-500 text-lg ml-2">（搜索：&quot;{searchTerm}&quot;）</span>}
+              {searchTerm && <span className="text-slate-500 text-lg ml-2">（搜索：&quot;{searchTerm}&quot;）</span>}
             </h2>
             {filteredDestinations.length > 0 && (
-              <div className="text-sm text-gray-500">
+              <div className="text-sm text-slate-500">
                 共 {transformDestinations.length} 个目的地
               </div>
             )}
@@ -236,7 +236,7 @@ export default function DestinationsPage() {
                           <div className="w-full h-full bg-black/30"></div>
                         </div>
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 flex items-center justify-center">
+                        <div className="w-full h-full bg-gradient-to-br from-amber-500 via-slate-500 to-pink-400 flex items-center justify-center">
                           <div className="text-center text-white">
                             <MapPin className="w-12 h-12 mx-auto mb-2 opacity-80" />
                             <span className="text-lg font-bold">{dest.name}</span>
@@ -267,16 +267,16 @@ export default function DestinationsPage() {
                       </div>
                     </div>
                     <CardContent className="p-6">
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-2">{dest.description}</p>
+                      <p className="text-slate-600 text-sm mb-4 line-clamp-2">{dest.description}</p>
                       
                       <div className="flex flex-wrap gap-2 mb-4">
                         {dest.highlights.slice(0, 3).map((highlight, index) => (
-                          <Badge key={index} variant="secondary" className="bg-blue-50 text-blue-700">
+                          <Badge key={index} variant="secondary" className="bg-amber-50 text-amber-800">
                             {highlight}
                           </Badge>
                         ))}
                         {dest.highlights.length > 3 && (
-                          <Badge variant="secondary" className="bg-gray-100 text-gray-600">
+                          <Badge variant="secondary" className="bg-stone-100 text-slate-600">
                             +{dest.highlights.length - 3}
                           </Badge>
                         )}
@@ -286,17 +286,17 @@ export default function DestinationsPage() {
                         <div className="flex items-center gap-1">
                           <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
                           <span className="font-semibold">{dest.rating}</span>
-                          <span className="text-gray-500 text-sm">({dest.reviews.toLocaleString()})</span>
+                          <span className="text-slate-500 text-sm">({dest.reviews.toLocaleString()})</span>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm text-gray-500">建议{dest.suggestedDays}天</p>
-                          <p className="font-semibold text-blue-600">¥{dest.averageBudgetPerDay}/天</p>
+                          <p className="text-sm text-slate-500">建议{dest.suggestedDays}天</p>
+                          <p className="font-semibold text-amber-700">¥{dest.averageBudgetPerDay}/天</p>
                         </div>
                       </div>
 
                       {dest.bestSeason.length > 0 && (
                         <div className="mt-3 pt-3 border-t">
-                          <p className="text-sm text-gray-500 mb-1">最佳季节：</p>
+                          <p className="text-sm text-slate-500 mb-1">最佳季节：</p>
                           <div className="flex flex-wrap gap-1">
                             {dest.bestSeason.slice(0, 3).map((season, index) => (
                               <Badge key={index} variant="outline" className="text-xs">
@@ -308,7 +308,7 @@ export default function DestinationsPage() {
                       )}
 
                       <div className="mt-4 text-center">
-                        <Button variant="secondary" className="w-full group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        <Button variant="secondary" className="w-full group-hover:bg-amber-700 group-hover:text-white transition-colors">
                           定制此目的地行程
                           <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
@@ -320,10 +320,10 @@ export default function DestinationsPage() {
             </div>
           ) : (
             <div className="text-center py-20">
-              <MapPin className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">未找到相关目的地</h3>
-              <p className="text-gray-500 mb-2">试试其他搜索词</p>
-              <p className="text-sm text-gray-400 mb-6">
+              <MapPin className="h-16 w-16 text-slate-300 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-slate-900 mb-2">未找到相关目的地</h3>
+              <p className="text-slate-500 mb-2">试试其他搜索词</p>
+              <p className="text-sm text-slate-400 mb-6">
                 提示：支持中英文搜索，也可以搜索国家、城市或关键词
               </p>
               <Button onClick={() => { setSearchTerm(""); setSelectedRegionGroup("all"); setSelectedRegion(null); }}>
@@ -335,25 +335,25 @@ export default function DestinationsPage() {
 
         {/* Travel Inspiration */}
         <div className="mt-20 max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">旅行灵感</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">旅行灵感</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="border-0 overflow-hidden shadow-lg">
-              <div className="h-40 bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+              <div className="h-40 bg-gradient-to-br from-slate-700 to-cyan-500 flex items-center justify-center">
                 <Calendar className="h-12 w-12 text-white" />
               </div>
               <CardContent className="p-6 text-center">
-                <h3 className="font-semibold text-gray-900 mb-2">季节推荐</h3>
-                <p className="text-gray-600 text-sm mb-4">根据季节为您推荐最佳目的地</p>
+                <h3 className="font-semibold text-slate-900 mb-2">季节推荐</h3>
+                <p className="text-slate-600 text-sm mb-4">根据季节为您推荐最佳目的地</p>
                 <Button variant="secondary" size="sm">查看推荐</Button>
               </CardContent>
             </Card>
             <Card className="border-0 overflow-hidden shadow-lg">
-              <div className="h-40 bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+              <div className="h-40 bg-gradient-to-br from-slate-600 to-pink-500 flex items-center justify-center">
                 <DollarSign className="h-12 w-12 text-white" />
               </div>
               <CardContent className="p-6 text-center">
-                <h3 className="font-semibold text-gray-900 mb-2">预算选择</h3>
-                <p className="text-gray-600 text-sm mb-4">根据预算找到适合的目的地</p>
+                <h3 className="font-semibold text-slate-900 mb-2">预算选择</h3>
+                <p className="text-slate-600 text-sm mb-4">根据预算找到适合的目的地</p>
                 <Button variant="secondary" size="sm">按预算筛选</Button>
               </CardContent>
             </Card>
@@ -362,8 +362,8 @@ export default function DestinationsPage() {
                 <Users className="h-12 w-12 text-white" />
               </div>
               <CardContent className="p-6 text-center">
-                <h3 className="font-semibold text-gray-900 mb-2">出行类型</h3>
-                <p className="text-gray-600 text-sm mb-4">根据出行人群推荐目的地</p>
+                <h3 className="font-semibold text-slate-900 mb-2">出行类型</h3>
+                <p className="text-slate-600 text-sm mb-4">根据出行人群推荐目的地</p>
                 <Button variant="secondary" size="sm">按类型筛选</Button>
               </CardContent>
             </Card>

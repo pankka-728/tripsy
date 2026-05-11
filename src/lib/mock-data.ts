@@ -204,7 +204,7 @@ export const MOCK_ITINERARY: Itinerary = {
           recommendedDishes: ["鲜虾天妇罗", "蔬菜天妇罗", "天妇罗盖饭"],
           address: "东京都台东区浅草1-1-1",
           rating: 4.5,
-          image: "https://images.unsplash.com/photo-1590478856136-85615699a54a?w=600&q=80"
+          image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80"
         },
         {
           time: "18:30",
@@ -402,7 +402,7 @@ export const MOCK_ITINERARY: Itinerary = {
           recommendedDishes: ["日式早餐"],
           address: "酒店内",
           rating: 4.2,
-          image: "https://images.unsplash.com/photo-1482049016gy-3504757044d8?w=600&q=80"
+          image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80"
         },
         {
           time: "13:00",
@@ -498,7 +498,7 @@ export const MOCK_ITINERARY: Itinerary = {
           recommendedDishes: ["烤鱼", "味噌汤", "腌菜", "米饭"],
           address: "旅馆内",
           rating: 4.7,
-          image: "https://images.unsplash.com/photo-1482049016gy-3504757044d8?w=600&q=80"
+          image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80"
         },
         {
           time: "12:30",
@@ -605,7 +605,7 @@ export const MOCK_ITINERARY: Itinerary = {
           recommendedDishes: ["烤鱼", "味噌汤", "腌菜", "米饭"],
           address: "旅馆内",
           rating: 4.7,
-          image: "https://images.unsplash.com/photo-1482049016gy-3504757044d8?w=600&q=80"
+          image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80"
         },
         {
           time: "12:30",
@@ -721,7 +721,7 @@ export const MOCK_ITINERARY: Itinerary = {
           recommendedDishes: ["烤鱼", "味噌汤", "腌菜", "米饭"],
           address: "旅馆内",
           rating: 4.7,
-          image: "https://images.unsplash.com/photo-1482049016gy-3504757044d8?w=600&q=80"
+          image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80"
         },
         {
           time: "12:00",
