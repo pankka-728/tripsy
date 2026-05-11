@@ -40,8 +40,41 @@ export default function ItineraryContent() {
   useEffect(() => {
     const isDemo = searchParams.get('demo') === 'true';
     if (isDemo) {
+      // 从 URL 参数中获取用户选择的目的地
+      const destinationsParam = searchParams.get('destinations');
+      const days = parseInt(searchParams.get('days') || '7');
+      const travelers = parseInt(searchParams.get('travelers') || '2');
+      
+      // 解析目的地列表
+      const destinations = destinationsParam 
+        ? destinationsParam.split(',').filter(d => d.trim()) 
+        : ["东京", "京都"];
+      
+      // 生成动态行程数据
+      const dynamicItinerary: Itinerary = {
+        ...MOCK_ITINERARY,
+        id: `demo-${Date.now()}`,
+        request: {
+          ...MOCK_ITINERARY.request,
+          days: days,
+          destinations: destinations,
+          travelers: {
+            ...MOCK_ITINERARY.request.travelers,
+            adults: travelers
+          }
+        },
+        title: destinations.length === 1 
+          ? `${destinations[0]} ${days}日定制之旅`
+          : `${destinations.join('·')} ${days}日定制之旅`,
+        description: destinations.length === 1
+          ? `为您精心策划的${destinations[0]}${days}日定制行程，涵盖当地最精彩的景点和体验。`
+          : `为您精心策划的${destinations.join('至')} ${days}日定制行程，涵盖各地最精彩的景点和体验。`,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      
       setTimeout(() => {
-        setItinerary(MOCK_ITINERARY);
+        setItinerary(dynamicItinerary);
         setLoading(false);
       }, 1000);
     }

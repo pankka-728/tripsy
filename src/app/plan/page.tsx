@@ -76,9 +76,21 @@ export default function PlanPage() {
   const handleSubmit = async () => {
     setLoading(true);
     
+    // 过滤并收集所有目的地
+    const validDestinations = destinations.filter(d => d.trim() !== "");
+    
+    // 将目的地编码到 URL 参数中
+    const params = new URLSearchParams();
+    params.set('demo', 'true');
+    if (validDestinations.length > 0) {
+      params.set('destinations', validDestinations.join(','));
+    }
+    params.set('days', String(formData.days || 7));
+    params.set('travelers', String((formData.travelers?.adults || 1)));
+    
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    router.push("/itinerary?demo=true");
+    router.push(`/itinerary?${params.toString()}`);
     setLoading(false);
   };
 
