@@ -27,8 +27,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { MOCK_ITINERARY, generateDynamicItinerary } from "@/lib/mock-data";
-import { Itinerary } from "@/types/travel";
+import { TravelRequest, Itinerary } from "@/types/travel";
+
+const LOADING_STEPS = [
+  "正在联网查询目的地最新信息...",
+  "正在分析景点特色与开放时间...",
+  "正在规划最优游览路线...",
+  "正在计算预算与费用...",
+  "正在生成个性化行程...",
+];
 
 export default function ItineraryContent() {
   const router = useRouter();
@@ -36,28 +43,75 @@ export default function ItineraryContent() {
   const [itinerary, setItinerary] = useState<Itinerary | null>(null);
   const [expandedDays, setExpandedDays] = useState<number[]>([1]);
   const [loading, setLoading] = useState(true);
+  const [loadingStep, setLoadingStep] = useState(0);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const isDemo = searchParams.get('demo') === 'true';
-    if (isDemo) {
-      // 从 URL 参数中获取用户选择的目的地
-      const destinationsParam = searchParams.get('destinations');
-      const days = parseInt(searchParams.get('days') || '7');
-      const travelers = parseInt(searchParams.get('travelers') || '2');
-      
-      // 解析目的地列表
-      const destinations = destinationsParam 
-        ? destinationsParam.split(',').filter(d => d.trim()) 
-        : ["东京", "京都"];
-      
-      // 生成动态行程数据
-      const dynamicItinerary = generateDynamicItinerary(destinations, days, travelers);
-      
-      setTimeout(() => {
-        setItinerary(dynamicItinerary);
-        setLoading(false);
-      }, 1000);
+    if (!isDemo) {
+      setLoading(false);
+      return;
     }
+
+    const destinationsParam = searchParams.get('destinations');
+    const days = parseInt(searchParams.get('days') || '7');
+    const travelers = parseInt(searchParams.get('travelers') || '2');
+    const departureDate = searchParams.get('departureDate') || new Date().toISOString().split('T')[0];
+    const travelType = (searchParams.get('travelType') as TravelRequest['travelType']) || 'family';
+    const transportationType = (searchParams.get('transportationType') as TravelRequest['transportationType']) || 'flight';
+    const preferencesParam = searchParams.get('preferences');
+    const preferences: TravelRequest['preferences'] = preferencesParam
+      ? preferencesParam.split(',') as TravelRequest['preferences']
+      : ['relax', 'culture'];
+
+    const destinations = destinationsParam
+      ? destinationsParam.split(',').filter(d => d.trim())
+      : ["东京", "京都"];
+
+    const travelRequest: TravelRequest = {
+      departureDate,
+      days,
+      destinations,
+      budget: { min: 5000, max: 20000, currency: 'CNY' },
+      transportationType,
+      travelType,
+      travelers: { adults: travelers, children: 0, seniors: 0 },
+      preferences,
+    };
+
+    // 模拟加载步骤动画
+    const stepInterval = setInterval(() => {
+      setLoadingStep(prev => {
+        if (prev >= LOADING_STEPS.length - 1) return prev;
+        return prev + 1;
+      });
+    }, 1200);
+
+    // 调用 AI API 生成行程
+    fetch('/api/generate-itinerary', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(travelRequest),
+    })
+      .then(async res => {
+        clearInterval(stepInterval);
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.error || `请求失败: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data: Itinerary) => {
+        setItinerary(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        clearInterval(stepInterval);
+        setError(err instanceof Error ? err.message : '行程生成失败');
+        setLoading(false);
+      });
+
+    return () => clearInterval(stepInterval);
   }, [searchParams]);
 
   const toggleDay = (day: number) => {
@@ -91,24 +145,62 @@ export default function ItineraryContent() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white py-12">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto px-4 max-w-2xl">
           <div className="text-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-amber-700 border-t-transparent mx-auto mb-6"></div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-2">AI旅游规划师正在为您生成行程</h2>
-            <p className="text-slate-600">正在联网查询最新信息，约需3秒...</p>
+            <div className="relative w-16 h-16 mx-auto mb-8">
+              <div className="absolute inset-0 rounded-full border-4 border-amber-200"></div>
+              <div className="absolute inset-0 rounded-full border-4 border-amber-700 border-t-transparent animate-spin"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Star className="h-6 w-6 text-amber-700 animate-pulse" />
+              </div>
+            </div>
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">AI 旅游规划师正在实时联网生成行程</h2>
+            <div className="space-y-3 max-w-md mx-auto">
+              {LOADING_STEPS.map((step, index) => (
+                <div
+                  key={step}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-500 ${
+                    index < loadingStep
+                      ? 'bg-amber-50 text-amber-800'
+                      : index === loadingStep
+                      ? 'bg-slate-100 text-slate-900'
+                      : 'bg-stone-50 text-stone-400'
+                  }`}
+                >
+                  <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-sm ${
+                    index < loadingStep
+                      ? 'bg-amber-700 text-white'
+                      : index === loadingStep
+                      ? 'bg-slate-700 text-white animate-pulse'
+                      : 'bg-stone-200 text-stone-400'
+                  }`}>
+                    {index < loadingStep ? (
+                      <CheckCircle className="h-4 w-4" />
+                    ) : (
+                      index + 1
+                    )}
+                  </div>
+                  <span className="text-sm font-medium">{step}</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-slate-500 text-sm mt-6">大模型实时生成中，请稍候...</p>
           </div>
         </div>
       </div>
     );
   }
 
-  if (!itinerary) {
+  if (error || !itinerary) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white py-12">
         <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="text-2xl font-bold text-slate-900 mb-4">未找到行程</h2>
-          <Button asChild>
-            <a href="/plan">返回定制页面</a>
+          <div className="bg-red-50 border border-red-200 rounded-xl p-8 mb-6">
+            <h2 className="text-2xl font-bold text-red-900 mb-2">行程生成失败</h2>
+            <p className="text-red-700">{error || "未能获取行程数据，请重试"}</p>
+          </div>
+          <Button onClick={() => router.push('/plan')}>
+            返回定制页面
           </Button>
         </div>
       </div>

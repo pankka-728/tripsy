@@ -88,8 +88,17 @@ export default function PlanPage() {
     }
     params.set('days', String(formData.days || 7));
     params.set('travelers', String((formData.travelers?.adults || 1)));
+    params.set('departureDate', formData.departureDate || new Date().toISOString().split('T')[0]);
+    params.set('travelType', formData.travelType || 'family');
+    params.set('transportationType', formData.transportationType || 'flight');
+    if (formData.preferences?.length) {
+      params.set('preferences', formData.preferences.join(','));
+    }
+    if (formData.specialRequirements) {
+      params.set('specialRequirements', formData.specialRequirements);
+    }
     
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 1500));
     
     router.push(`/itinerary?${params.toString()}`);
     setLoading(false);
