@@ -1,43 +1,43 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Itinerary, TravelRequest, ItineraryDay, ItineraryActivity, HotelInfo, MealInfo, WeatherInfo, BudgetBreakdown, TransportationInfo } from "@/types/travel";
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
-// 动态导入 SDK，避免构建时初始化问题
-async function getLLMClient(headers: Headers) {
-  const { LLMClient, Config, HeaderUtils } = await import("coze-coding-dev-sdk");
-  const config = new Config();
-  const customHeaders = HeaderUtils.extractForwardHeaders(headers);
-  return new LLMClient(config, customHeaders);
-}
-
-async function getSearchClient(headers: Headers) {
-  const { SearchClient, Config, HeaderUtils } = await import("coze-coding-dev-sdk");
-  const config = new Config();
-  const customHeaders = HeaderUtils.extractForwardHeaders(headers);
-  return new SearchClient(config, customHeaders);
-}
+const API_KEY = process.env.COZE_WORKLOAD_IDENTITY_API_KEY || "";
+const SEARCH_BASE_URL = process.env.COZE_INTEGRATION_BASE_URL || "https://integration.coze.cn";
+const MODEL_BASE_URL = process.env.COZE_INTEGRATION_MODEL_BASE_URL || "https://integration.coze.cn/api/v3";
 
 // 搜索目的地最新实时信息
-async function searchDestinationInfo(city: string, headers: Headers): Promise<string> {
+async function searchDestinationInfo(city: string): Promise<string> {
   try {
-    const searchClient = await getSearchClient(headers);
-
     const queries = [
-      `${city} 旅游攻略 必去景点 推荐 2025`,
+      `${city} 旅游攻略 必去景点 推荐`,
       `${city} 美食餐厅 特色小吃 住宿推荐`,
-      `${city} 门票价格 交通指南 最新`,
+      `${city} 门票价格 交通指南`,
     ];
 
-    const searchPromises = queries.map(q =>
-      searchClient.advancedSearch(q, {
-        count: 5,
-        needSummary: true,
-        timeRange: "6m",
-      }).catch(() => null)
-    );
+    const searchPromises = queries.map(async (query) => {
+      try {
+        const res = await fetch(`${SEARCH_BASE_URL}/api/search_api/web_search`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            Query: query,
+            SearchType: "web",
+            Count: 5,
+            NeedSummary: true,
+          }),
+        });
+        if (!res.ok) return null;
+        return await res.json();
+      } catch {
+        return null;
+      }
+    });
 
     const results = await Promise.all(searchPromises);
-
     const contextParts: string[] = [];
 
     results.forEach((res, idx) => {
@@ -45,12 +45,13 @@ async function searchDestinationInfo(city: string, headers: Headers): Promise<st
       const label = ["景点攻略", "美食住宿", "门票交通"][idx];
       contextParts.push(`\n=== ${label} ===`);
 
-      if (res.summary) {
-        contextParts.push(`概要：${res.summary}`);
+      const data = res.data?.web_search_result || res.data || {};
+      if (data.summary) {
+        contextParts.push(`概要：${data.summary}`);
       }
 
-      const items = res.web_items?.slice(0, 5) || [];
-      items.forEach((item: { title?: string; snippet?: string; link?: string }) => {
+      const items = data.results?.slice(0, 5) || [];
+      items.forEach((item: { title?: string; snippet?: string }) => {
         if (item.snippet) {
           contextParts.push(`- ${item.title || ""}: ${item.snippet.slice(0, 300)}`);
         }
@@ -63,9 +64,41 @@ async function searchDestinationInfo(city: string, headers: Headers): Promise<st
   }
 }
 
-// 解析大模型返回的 JSON，兼容各种格式
+// 调用大模型生成行程
+async function generateItineraryWithLLM(prompt: string): Promise<string> {
+  const res = await fetch(`${MODEL_BASE_URL}/chat/completions`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "doubao-seed-2-0-lite-260215",
+      messages: [
+        {
+          role: "system",
+          content:
+            "你是一位专业的旅行规划师，精通全球旅游目的地。你回复时必须只输出纯 JSON 数组，不要有任何前言、后语或 Markdown 格式标记。",
+        },
+        { role: "user", content: prompt },
+      ],
+      temperature: 0.7,
+      stream: false,
+    }),
+  });
+
+  if (!res.ok) {
+    const errorText = await res.text().catch(() => "");
+    throw new Error(`LLM API error ${res.status}: ${errorText.slice(0, 200)}`);
+  }
+
+  const data = await res.json();
+  const content = data.choices?.[0]?.message?.content || "";
+  return content;
+}
+
+// 解析大模型返回的 JSON
 function extractJsonArray(text: string): unknown[] | null {
-  // 尝试提取 ```json ... ``` 代码块
   const codeBlockMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
   if (codeBlockMatch) {
     try {
@@ -75,7 +108,6 @@ function extractJsonArray(text: string): unknown[] | null {
     }
   }
 
-  // 尝试找到第一个 '[' 到最后一个 ']'
   const start = text.indexOf("[");
   const end = text.lastIndexOf("]");
   if (start !== -1 && end !== -1 && end > start) {
@@ -86,7 +118,6 @@ function extractJsonArray(text: string): unknown[] | null {
     }
   }
 
-  // 尝试整个文本作为 JSON
   try {
     const parsed = JSON.parse(text.trim());
     if (Array.isArray(parsed)) return parsed;
@@ -111,9 +142,7 @@ function buildPrompt(request: TravelRequest, searchContext: string): string {
     solo: "独自旅行",
   };
   const travelType = travelTypeMap[request.travelType] || request.travelType;
-  const prefs = request.preferences?.length
-    ? request.preferences.join("、")
-    : "无特殊偏好";
+  const prefs = request.preferences?.length ? request.preferences.join("、") : "无特殊偏好";
   const specialReq = request.specialRequirements || "无";
 
   const contextBlock = searchContext
@@ -170,7 +199,6 @@ function getWeatherForDate(dateStr: string, cityName: string): WeatherInfo {
   const date = new Date(dateStr);
   const month = date.getMonth() + 1;
 
-  // 根据月份和简单哈希确定天气
   const conditions: WeatherInfo["condition"][] = ["sunny", "cloudy", "rainy", "sunny", "cloudy"];
   const hash = (cityName.charCodeAt(0) + month * 7) % conditions.length;
   const condition = conditions[hash];
@@ -220,7 +248,7 @@ function getWeatherForDate(dateStr: string, cityName: string): WeatherInfo {
   };
 }
 
-function generateHotel(cityName: string, isFirstDay: boolean, isLastDay: boolean): HotelInfo {
+function generateHotel(cityName: string): HotelInfo {
   const starRating = 4;
   const pricePerNight = cityName.includes("东京") || cityName.includes("巴黎") || cityName.includes("纽约") ? 1200 : 600;
   return {
@@ -238,7 +266,7 @@ function generateHotel(cityName: string, isFirstDay: boolean, isLastDay: boolean
 
 function generateMeals(cityName: string, dateStr: string, isFirstDay: boolean, isLastDay: boolean): MealInfo[] {
   const meals: MealInfo[] = [];
-  const cuisine = ["北京", "成都", "西安", "重庆", "广州", "杭州", "苏州"].some(c => cityName.includes(c)) ? "中式料理" : "当地特色料理";
+  const cuisine = ["北京", "成都", "西安", "重庆", "广州", "杭州", "苏州"].some((c) => cityName.includes(c)) ? "中式料理" : "当地特色料理";
 
   if (!isFirstDay) {
     meals.push({
@@ -289,7 +317,7 @@ function generateTransportation(request: TravelRequest): TransportationInfo[] {
   const dest = request.destinations[0] || "目的地";
   return [
     {
-      type: request.transportationType === "self-drive" ? "private" : (request.transportationType === "train" ? "train" : "flight"),
+      type: request.transportationType === "self-drive" ? "private" : request.transportationType === "train" ? "train" : "flight",
       from: "出发城市",
       to: dest,
       departureTime: `${request.departureDate} 08:00`,
@@ -302,7 +330,7 @@ function generateTransportation(request: TravelRequest): TransportationInfo[] {
 }
 
 function calculateBudget(days: number, travelers: number, cityName: string): BudgetBreakdown {
-  const isInternational = !["北京", "上海", "成都", "西安", "重庆", "广州", "杭州", "苏州", "南京", "武汉", "长沙", "厦门", "青岛", "大连", "昆明", "桂林", "拉萨", "乌鲁木齐", "哈尔滨", "三亚"].some(c => cityName.includes(c));
+  const isInternational = !["北京", "上海", "成都", "西安", "重庆", "广州", "杭州", "苏州", "南京", "武汉", "长沙", "厦门", "青岛", "大连", "昆明", "桂林", "拉萨", "乌鲁木齐", "哈尔滨", "三亚"].some((c) => cityName.includes(c));
   const basePerDay = isInternational ? 2000 : 800;
   const accommodation = basePerDay * 0.4 * days * travelers;
   const dining = basePerDay * 0.25 * days * travelers;
@@ -326,11 +354,10 @@ function calculateBudget(days: number, travelers: number, cityName: string): Bud
 
 function generateHighlights(days: ItineraryDay[], cityName: string): string[] {
   const highlights: string[] = [];
-  const allTitles = days.flatMap(d => d.activities.map(a => a.title));
+  const allTitles = days.flatMap((d) => d.activities.map((a) => a.title));
 
-  // 选取最具代表性的活动作为亮点
   const uniqueTitles = [...new Set(allTitles)].slice(0, 6);
-  uniqueTitles.forEach(title => {
+  uniqueTitles.forEach((title) => {
     if (!title.includes("早餐") && !title.includes("午餐") && !title.includes("晚餐") && !title.includes("入住") && !title.includes("退房")) {
       highlights.push(`深度体验${title}，感受${cityName}独特魅力`);
     }
@@ -346,7 +373,7 @@ function generateHighlights(days: ItineraryDay[], cityName: string): string[] {
 
 function generateTips(request: TravelRequest, cityName: string): string[] {
   const tips: string[] = [];
-  const isInternational = !["北京", "上海", "成都", "西安", "重庆", "广州", "杭州", "苏州", "南京", "武汉", "长沙", "厦门", "青岛", "大连", "昆明", "桂林", "拉萨", "乌鲁木齐", "哈尔滨", "三亚"].some(c => cityName.includes(c));
+  const isInternational = !["北京", "上海", "成都", "西安", "重庆", "广州", "杭州", "苏州", "南京", "武汉", "长沙", "厦门", "青岛", "大连", "昆明", "桂林", "拉萨", "乌鲁木齐", "哈尔滨", "三亚"].some((c) => cityName.includes(c));
 
   if (isInternational) {
     tips.push("请提前办理好签证和相关入境手续，确保护照有效期在6个月以上");
@@ -380,27 +407,12 @@ export async function POST(request: NextRequest) {
 
     // 1. 先搜索目的地最新实时信息
     const mainCity = travelRequest.destinations[0];
-    const searchContext = await searchDestinationInfo(mainCity, request.headers);
+    const searchContext = await searchDestinationInfo(mainCity);
 
     // 2. 调用大模型生成行程（注入搜索到的实时信息）
-    const client = await getLLMClient(request.headers);
-
     const prompt = buildPrompt(travelRequest, searchContext);
+    const rawText = await generateItineraryWithLLM(prompt);
 
-    const messages = [
-      {
-        role: "system" as const,
-        content: "你是一位专业的旅行规划师，精通全球旅游目的地。你回复时必须只输出纯 JSON 数组，不要有任何前言、后语或 Markdown 格式标记。",
-      },
-      { role: "user" as const, content: prompt },
-    ];
-
-    const response = await client.invoke(messages, {
-      model: "doubao-seed-2-0-lite-260215",
-      temperature: 0.7,
-    });
-
-    const rawText = response.content || "";
     const parsedDays = extractJsonArray(rawText);
 
     if (!parsedDays || !Array.isArray(parsedDays) || parsedDays.length === 0) {
@@ -418,7 +430,6 @@ export async function POST(request: NextRequest) {
       const isLastDay = index === parsedDays.length - 1;
       const dateStr = String(dayData.date || "");
 
-      // 解析 activities
       const rawActivities = Array.isArray(dayData.activities) ? dayData.activities : [];
       const activities: ItineraryActivity[] = rawActivities.map((a: unknown) => {
         const act = a as Record<string, unknown>;
@@ -438,7 +449,7 @@ export async function POST(request: NextRequest) {
         date: dateStr,
         title: String(dayData.title || `第${index + 1}天`),
         activities,
-        hotel: generateHotel(mainCity, isFirstDay, isLastDay),
+        hotel: generateHotel(mainCity),
         meals: generateMeals(mainCity, dateStr, isFirstDay, isLastDay),
         weather: getWeatherForDate(dateStr, mainCity),
       };
