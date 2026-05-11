@@ -11,6 +11,59 @@ async function getLLMClient(headers: Headers) {
   return new LLMClient(config, customHeaders);
 }
 
+async function getSearchClient(headers: Headers) {
+  const { SearchClient, Config, HeaderUtils } = await import("coze-coding-dev-sdk");
+  const config = new Config();
+  const customHeaders = HeaderUtils.extractForwardHeaders(headers);
+  return new SearchClient(config, customHeaders);
+}
+
+// 搜索目的地最新实时信息
+async function searchDestinationInfo(city: string, headers: Headers): Promise<string> {
+  try {
+    const client = await getSearchClient(headers);
+
+    const queries = [
+      `${city} 旅游攻略 必去景点 推荐 2025`,
+      `${city} 美食餐厅 特色小吃 住宿推荐`,
+      `${city} 门票价格 交通指南 最新`,
+    ];
+
+    const searchPromises = queries.map(q =>
+      client.advancedSearch(q, {
+        count: 5,
+        needSummary: true,
+        timeRange: "6m",
+      }).catch(() => null)
+    );
+
+    const results = await Promise.all(searchPromises);
+
+    const contextParts: string[] = [];
+
+    results.forEach((res, idx) => {
+      if (!res) return;
+      const label = ["景点攻略", "美食住宿", "门票交通"][idx];
+      contextParts.push(`\n=== ${label} ===`);
+
+      if (res.summary) {
+        contextParts.push(`概要：${res.summary}`);
+      }
+
+      const items = res.web_items?.slice(0, 3) || [];
+      items.forEach((item: { title?: string; snippet?: string }) => {
+        if (item.snippet) {
+          contextParts.push(`- ${item.title || ""}: ${item.snippet.slice(0, 200)}`);
+        }
+      });
+    });
+
+    return contextParts.join("\n");
+  } catch {
+    return "";
+  }
+}
+
 // 解析大模型返回的 JSON，兼容各种格式
 function extractJsonArray(text: string): unknown[] | null {
   // 尝试提取 ```json ... ``` 代码块
@@ -48,7 +101,7 @@ function extractJsonArray(text: string): unknown[] | null {
   return null;
 }
 
-function buildPrompt(request: TravelRequest): string {
+function buildPrompt(request: TravelRequest, searchContext: string): string {
   const destinations = request.destinations.join("、");
   const travelTypeMap: Record<string, string> = {
     family: "家庭亲子游",
@@ -64,6 +117,10 @@ function buildPrompt(request: TravelRequest): string {
     : "无特殊偏好";
   const specialReq = request.specialRequirements || "无";
 
+  const contextBlock = searchContext
+    ? `\n\n【以下是从互联网搜索到的该目的地最新实时信息，请优先参考这些数据来规划行程】\n${searchContext}\n`
+    : "";
+
   return `你是一位资深旅行规划师，擅长为全球旅行者制定 detailed 的每日行程。
 
 请为以下行程规划每日游玩活动：
@@ -74,7 +131,7 @@ function buildPrompt(request: TravelRequest): string {
 【出行人数】${request.travelers.adults}成人${request.travelers.children > 0 ? " · " + request.travelers.children + "儿童" : ""}${request.travelers.seniors > 0 ? " · " + request.travelers.seniors + "老人" : ""}
 【旅行类型】${travelType}
 【偏好】${prefs}
-【特殊要求】${specialReq}
+【特殊要求】${specialReq}${contextBlock}
 
 请生成一个 JSON 数组，每天一个对象，格式如下：
 [
@@ -322,9 +379,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "目的地不能为空" }, { status: 400 });
     }
 
+    // 1. 先搜索目的地最新实时信息
+    const mainCity = travelRequest.destinations[0];
+    const searchContext = await searchDestinationInfo(mainCity, request.headers);
+
+    // 2. 调用大模型生成行程（注入搜索到的实时信息）
     const client = await getLLMClient(request.headers);
 
-    const prompt = buildPrompt(travelRequest);
+    const prompt = buildPrompt(travelRequest, searchContext);
 
     const messages = [
       {
@@ -351,7 +413,6 @@ export async function POST(request: NextRequest) {
     }
 
     // 构建完整的 Itinerary 对象
-    const mainCity = travelRequest.destinations[0];
     const days: ItineraryDay[] = parsedDays.map((d: unknown, index: number) => {
       const dayData = d as Record<string, unknown>;
       const isFirstDay = index === 0;
